@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Gaze - Sky Gazing</title>
+    <link rel="icon" type="image/png" href="assets/logoend.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("assets/stargazingbg.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: "Poppins", sans-serif;
+        }
+
+
+        /* Navbar */
+
+        .navbar {
+            --bs-navbar-toggler-border-color: #37b6ff;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2855, 182, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        .nav-link {
+            color: white;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus {
+            color: #37b6ff;
+        }
+
+        .navbar-nav .nav-link.active,
+        .navbar-nav .nav-link.show {
+            color: #37b6ff;
+        }
+
+        .nav-item {
+            margin: 0 10px;
+        }
+
+        .dropdown-item {
+            color: white;
+
+        }
+
+        .dropdown-menu {
+            --bs-dropdown-bg: #2b2b2b;
+        }
+
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: #37b6ff;
+            color: white;
+
+        }
+
+        .dropdown-item.active {
+            background-color: #37b6ff;
+        }
+
+        /* custom  */
+
+        .social {
+            padding: 10px;
+            transition: all ease-in-out 0.3s;
+            display: inline-block;
+            perspective: 1000px;
+
+        }
+
+        .social svg {
+            display: block;
+            transition: transform 1s;
+            transform-style: preserve-3d;
+
+        }
+
+        .social:hover svg {
+            transform: rotateY(360deg);
+        }
+
+        .social:hover {
+            border-radius: 100%;
+            -webkit-box-shadow: 0px 0px 47px 1px rgba(55, 182, 255, 0.89);
+            -moz-box-shadow: 0px 0px 47px 1px rgba(55, 182, 255, 0.89);
+            box-shadow: 0px 0px 47px 1px rgba(55, 182, 255, 0.89);
+        }
+
+        .m-6 {
+            margin: 80px 100px;
+        }
+
+        .btn-primary {
+            background-color: #37b6ff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #37b6ffb2;
+        }
+
+        .cs-shadow {
+            -webkit-box-shadow: 0px 0px 13px -1px rgba(255, 255, 255, 1);
+            -moz-box-shadow: 0px 0px 13px -1px rgba(255, 255, 255, 1);
+            box-shadow: 0px 0px 13px -1px rgba(255, 255, 255, 1);
+        }
+
+        .border-color {
+            border: 2px solid #37b6ff;
+        }
+
+        /* marquee */
+        .marquee-container {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+
+        .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            color: #37b6ff;
+            font-size: 1.2rem;
+            font-family: 'Arial', sans-serif;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-------------------- NavBar -------------------->
+
+
+    <nav class="navbar navbar-expand-lg border-bottom" style="backdrop-filter: blur(10px);">
+        <div class="container">
+            <a class="navbar-brand text-white fs-3  " href="index.html" data-aos="zoom-in" data-aos-duration="1500">
+                <img src="assets/logo5.png" alt="Logo" width="300" height="50" class="">
+            </a>
+
+            <button class="navbar-toggler" data-aos="zoom-in" data-aos-duration="1500" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav ms-auto" data-aos="zoom-in" data-aos-duration="1500">
+
+                    <li class="nav-item text-center">
+                        <a class="nav-link" aria-current="page" href="index.html">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                            </svg><br>Home</a>
+                    </li>
+
+                    <!-- Explore DropDown -->
+                    <li class="nav-item dropdown rounded text-center">
+                        <a class="nav-link active text-center dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-binoculars-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M4.5 1A1.5 1.5 0 0 0 3 2.5V3h4v-.5A1.5 1.5 0 0 0 5.5 1zM7 4v1h2V4h4v.882a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V13H9v-1.5a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5V13H1V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882V4zM1 14v.5A1.5 1.5 0 0 0 2.5 16h3A1.5 1.5 0 0 0 7 14.5V14zm8 0v.5a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5-1.5V14zm4-11H9v-.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5z" />
+                            </svg><br>Explore
+                        </a>
+                        <ul class="dropdown-menu ">
+                            <li><a class="dropdown-item rounded-1" href="planets.html">
+                                    Planets</a></li>
+
+                            <li><a class="dropdown-item rounded-1" href="constellation.html">
+                                    Constellations</a></li>
+
+                            <li><a class="dropdown-item rounded-1 active" href="stargazing.html">
+                                    Star Gaze</a></li>
+
+                            <li><a class="dropdown-item rounded-1" href="comets.html">
+                                    Comets</a></li>
+                        </ul>
+                    </li>
+                    <!-- Explore DropDown END -->
+
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="insights.html">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-star-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                            </svg><br>Insights
+                        </a>
+                    </li>
+
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="obervatories.html">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                                <path
+                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                            </svg><br>Observatories</a>
+                    </li>
+
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="getintouch.html">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-people-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+                            </svg><br>Get in Touch</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- usercount -->
+        <button type="button" class="rounded-circle bg-transparent border-0 d-none d-lg-block mx-5 position-relative">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#37b6ff" class="bi bi-person-rolodex"
+                viewBox="0 0 16 16">
+                <path d="M8 9.05a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+                <path
+                    d="M1 1a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h.5a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h.5a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H6.707L6 1.293A1 1 0 0 0 5.293 1zm0 1h4.293L6 2.707A1 1 0 0 0 6.707 3H15v10h-.085a1.5 1.5 0 0 0-2.4-.63C11.885 11.223 10.554 10 8 10c-2.555 0-3.886 1.224-4.514 2.37a1.5 1.5 0 0 0-2.4.63H1z" />
+            </svg>
+            <span id="usercount"
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+
+                <span class="visually-hidden">unread messages</span>
+            </span>
+        </button>
+    </nav>
+
+
+    <!-- intro -->
+    <div class="container mx-auto px-3" data-aos="fade-right" data-aos-duration="1500"
+        style="padding-bottom: 10%; margin-top: 18%; text-align: justify;">
+        <h1 class="display-5 fw-bold mb-3 text-center text-md-start" style="color: #37b6ff;">
+            Gaze into the Cosmos
+        </h1>
+        <p class="text-white fs-4">
+            Step outside and look up. Stargazing connects us to the vastness of space, where ancient constellations and
+            distant planets
+            light up the night sky. Whether you're new to stargazing or a seasoned astronomer, this journey through the
+            heavens offers
+            awe-inspiring sights and insights into the universe. Let the stars guide your next adventure!
+        </p>
+        <div class="d-flex justify-content-center justify-content-md-start">
+            <a href="#essential" class="btn btn-primary btn-lg fw-semibold px-5">Begin Your Stargazing Journey</a>
+        </div>
+    </div>
+
+
+    <!-- Essentials -->
+    <section id="essential">
+        <div class="m-6" style="border-bottom: 1px solid #ffffff;"></div>
+        <h1 class="display-5 fw-bold text-center mb-5" style="color: #37b6ff;" data-aos="zoom-in">Essential Gear For
+            Stargazing
+        </h1>
+
+        <div class="container mx-auto cs-shadow rounded p-5 border-color"
+            style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);" data-aos="zoom-in-up"
+            style="padding-bottom: 10%; margin-top: 5%; text-align: justify;">
+            <p class="text-white fs-5 mb-5">
+                To fully enjoy the beauty of the night sky, it's important to have the right equipment. Whether you're a
+                beginner or an
+                experienced stargazer, here are some tools that will enhance your experience.
+            </p>
+
+            <div class="row g-5 row-cols-1 row-cols-lg-2 mx-auto">
+                <div class="col d-flex justify-content-center mb-4" data-aos="fade-up"
+                    data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+                    <div>
+                        <h5 class="fw-bold fs-4 mb-3" style="color: #37b6ff;">Telescope or Binoculars</h5>
+                        <p class="text-white mb-0">
+                            For detailed views of celestial bodies, a pair of binoculars or a telescope is key.
+                            Binoculars
+                            are perfect
+                            for beginners, while a telescope offers more advanced views.
+                        </p>
+                    </div>
+                    <div class=" ms-3">
+                        <img src="assets/telescope.png" alt="Binoculars " class="img-fluid"
+                            style="width: 200px; height: 80px;">
+                    </div>
+                </div>
+
+                <div class="col d-flex justify-content-center mb-4" data-aos="fade-up"
+                    data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+                    <div>
+                        <h5 class="fw-bold fs-4 mb-3" style="color: #37b6ff;">Star Maps or Stargazing Apps</h5>
+                        <p class="text-white mb-0">
+                            Star maps or apps help you locate constellations, planets, and more. A digital or physical
+                            guide
+                            is invaluable
+                            when navigating the night sky.
+                        </p>
+                    </div>
+                    <div class=" ms-3">
+                        <img src="assets/compass.png" alt="Star Map " class="img-fluid"
+                            style="width: 200px; height: 80px;">
+                    </div>
+                </div>
+
+                <div class="col d-flex justify-content-center mb-4" data-aos="fade-up"
+                    data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+                    <div>
+                        <h5 class="fw-bold fs-4 mb-3" style="color: #37b6ff;">Red Light Flashlight</h5>
+                        <p class="text-white mb-0">
+                            Preserve your night vision with a red flashlight. It’s ideal for checking star maps without
+                            disturbing your
+                            eyes’ adjustment to the dark.
+                        </p>
+                    </div>
+                    <div class=" ms-3">
+                        <img src="assets/flashlight.png" alt="Red Light Flashlight " class="img-fluid"
+                            style="width: 200px; height: 80px;">
+                    </div>
+                </div>
+
+                <div class="col d-flex justify-content-center mb-4" data-aos="fade-up"
+                    data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+                    <div>
+                        <h5 class="fw-bold fs-4 mb-3" style="color: #37b6ff;">Comfortable Chair or Blanket</h5>
+                        <p class="text-white mb-0">
+                            Stargazing requires patience. A reclining chair or a cozy blanket will help you stay
+                            comfortable
+                            during long
+                            observation sessions.
+                        </p>
+                    </div>
+                    <div class=" ms-3">
+                        <img src="assets/chair.png" alt="Chair " class="img-fluid" style="width: 200px; height: 80px;">
+                    </div>
+                </div>
+
+                <div class="col d-flex justify-content-center mb-4" data-aos="fade-up"
+                    data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+                    <div>
+                        <h5 class="fw-bold fs-4 mb-3" style="color: #37b6ff;">Warm Clothing & Snacks</h5>
+                        <p class="text-white mb-0">
+                            Even in warmer seasons, nights can get chilly. Bring extra layers, and pack some snacks to
+                            stay
+                            comfortable
+                            during extended sessions.
+                        </p>
+                    </div>
+                    <div class=" ms-3">
+                        <img src="assets/warm-clothes.png" alt="Warm Clothing " class="img-fluid"
+                            style="width: 200px; height: 80px;">
+                    </div>
+                </div>
+
+                <div class="col d-flex justify-content-center mb-4" data-aos="fade-up"
+                    data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+                    <div>
+                        <h5 class="fw-bold fs-4 mb-3" style="color: #37b6ff;">Notebook to Record Observations</h5>
+                        <p class="text-white mb-0">
+                            Use a notebook to jot down your observations, including celestial objects, their positions,
+                            and
+                            the date and time.
+                    </div>
+                    <div class=" ms-3">
+                        <img src="assets/notebook.png" alt="Notebook " class="img-fluid"
+                            style="width: 140px; height: 80px;">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+
+    <!-- upcoming events -->
+    <div class="m-6" style="border-bottom: 1px solid #ffffff;"></div>
+    <h1 class="display-5 fw-bold text-center mb-5" style="color: #37b6ff;" data-aos="zoom-in">Upcoming Celestial Events
+    </h1>
+    <div class="container mx-auto cs-shadow rounded p-5 border-color"
+        style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);" data-aos="zoom-in-up">
+        <p class="text-white fs-5 mb-4">
+            Stay informed about significant celestial events happening soon. From meteor showers to lunar eclipses, make
+            sure you don't miss these amazing opportunities to witness the wonders of the night sky.
+        </p>
+
+        <div class="row g-3 row-cols-1 row-cols-md-2 g-4">
+            <div class="col" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+                <div class="p-3 rounded border-color" style="background: rgba(0, 0, 0, 0.4);">
+                    <h5 class="fw-bold" style="color: #37b6ff;">Geminid Meteor Shower</h5>
+                    <p class="text-white mb-0">
+                        <strong class="text-white">Date:</strong> December 13–14, 2024<br>
+                        <strong class="text-white">Location:</strong> Visible worldwide<br>
+                        Known for its bright and multicolored meteors, the Geminids can produce up to 120 meteors per
+                        hour.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+                <div class="p-3 rounded border-color" style="background: rgba(0, 0, 0, 0.4);">
+                    <h5 class="fw-bold" style="color: #37b6ff;">Total Lunar Eclipse</h5>
+                    <p class="text-white mb-0">
+                        <strong class="text-white">Date:</strong> March 14, 2025<br>
+                        <strong class="text-white">Location:</strong> Visible from North and South America<br>
+                        A stunning event where the entire moon passes through Earth's shadow, creating a dramatic
+                        display.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+                <div class="p-3 rounded border-color" style="background: rgba(0, 0, 0, 0.4);">
+                    <h5 class="fw-bold" style="color: #37b6ff;">Lyrid Meteor Shower</h5>
+                    <p class="text-white mb-0">
+                        <strong class="text-white">Date:</strong> April 16–25, 2025<br>
+                        <strong class="text-white">Location:</strong> Visible worldwide<br>
+                        One of the oldest recorded meteor showers, the Lyrids can produce up to 20 meteors per hour.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+                <div class="p-3 rounded border-color" style="background: rgba(0, 0, 0, 0.4);">
+                    <h5 class="fw-bold" style="color: #37b6ff;">Perseid Meteor Shower</h5>
+                    <p class="text-white mb-0">
+                        <strong class="text-white">Date:</strong> August 12–13, 2025<br>
+                        <strong class="text-white">Location:</strong> Visible from most parts of the world<br>
+                        A highly popular meteor shower, the Perseids can produce up to 100 meteors per hour at its peak.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+                <div class="p-3 rounded border-color" style="background: rgba(0, 0, 0, 0.4);">
+                    <h5 class="fw-bold" style="color: #37b6ff;">Quadrantid Meteor Shower</h5>
+                    <p class="text-white mb-0">
+                        <strong class="text-white">Date:</strong> January 3–4, 2025<br>
+                        <strong class="text-white">Location:</strong> Visible from Northern Hemisphere<br>
+                        This short-lived shower can produce up to 40 meteors per hour and is best observed in the early
+                        morning hours.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+                <div class="p-3 rounded border-color" style="background: rgba(0, 0, 0, 0.4);">
+                    <h5 class="fw-bold" style="color: #37b6ff;">Annular Solar Eclipse</h5>
+                    <p class="text-white mb-0">
+                        <strong class="text-white">Date:</strong> October 2, 2025<br>
+                        <strong class="text-white">Location:</strong> Visible from Africa, Middle East, and India<br>
+                        During this eclipse, the moon will cover the center of the sun, leaving a "ring of fire" around
+                        the edges.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+                <div class="p-3 rounded border-color" style="background: rgba(0, 0, 0, 0.4);">
+                    <h5 class="fw-bold" style="color: #37b6ff;">Eta Aquarid Meteor Shower</h5>
+                    <p class="text-white mb-0">
+                        <strong class="text-white">Date:</strong> May 5–6, 2025<br>
+                        <strong class="text-white">Location:</strong> Visible from Southern Hemisphere<br>
+                        This meteor shower is known for its fast-moving meteors, reaching speeds of up to 66 kilometers
+                        per second.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+                <div class="p-3 rounded border-color" style="background: rgba(0, 0, 0, 0.4);">
+                    <h5 class="fw-bold" style="color: #37b6ff;">Partial Solar Eclipse</h5>
+                    <p class="text-white mb-0">
+                        <strong class="text-white">Date:</strong> March 29, 2025<br>
+                        <strong class="text-white">Location:</strong> Visible from North America and Europe<br>
+                        During this event, the moon will cover part of the sun, creating a beautiful partial eclipse in
+                        the daytime sky.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="d-flex justify-content-center mt-5" data-aos="fade-up" data-aos-anchor-placement="top-bottom"
+            data-aos-duration="1000">
+            <a href="getintouch.html#sub" class="btn btn-primary btn-lg fw-semibold">Subscribe for Event Updates</a>
+        </div>
+    </div>
+
+    <!-- marquee -->
+    <div class="marquee-container" id="marqueeContainer">
+        <div class="marquee">
+            🌌 Welcome to our Sky Gazing website! Discover the wonders of the universe: Learn about planets,
+            constellations, comets, and upcoming celestial events! 🌠
+        </div>
+    </div>
+
+
+    <!-- Footer  -->
+    <div id="footer" class="container-fluid border-top pt-4 text-white"
+        style="margin-top: 8%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);">
+        <div class="container text-center">
+            <div class="row-1 my-3" data-aos="fade-up">
+                <div class="col d-flex justify-content-center">
+
+                    <a href="https://www.facebook.com/" target="_blank" class="nav-link m-2 social">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-facebook" viewBox="0 0 16 16">
+                            <path
+                                d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/" target="_blank" class="nav-link m-2 social">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-instagram" viewBox="0 0 16 16">
+                            <path
+                                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/?lang=en" class="nav-link m-2 social" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-twitter-x" viewBox="0 0 16 16">
+                            <path
+                                d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="col my-3 ">
+
+                    <p>A 563, Main Shahrah-e-Usman, Sector 11-A Sector 11 A North Karachi Twp, Karachi, Karachi City,
+                        Sindh 75850
+                    </p>
+                    <p><i class="fas fa-phone" style="color: #37b6ff; font-size: 18px;"></i>&nbsp; +92 123-456789
+                        &nbsp;&nbsp;|&nbsp;&nbsp; <i class="fas fa-envelope"
+                            style="color: #37b6ff; font-size: 18px;"></i>
+                        &nbsp;aptechnorthkarachi@edu.com.pk</p>
+                </div>
+
+                <div class="col d-flex justify-content-center">
+                    <a class="navbar-brand text-white" href="index.html">
+                        <img src="assets/logo5.png" alt="Logo" width="300" height="50" class="">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container text-center">
+            <p class="py-2 border-top" style="margin-bottom: 0;">All Rights Reserved By Sky Gazing</p>
+        </div>
+
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script>
+        for (var i = 1; i <= 500; i++) {
+            (function (index) {
+                setTimeout(function () {
+                    document.getElementById('usercount').innerHTML = index;
+                }, index * 3);
+            })(i);
+        }
+    </script>
+    <script>
+        const marqueeContainer = document.getElementById('marqueeContainer');
+        const footer = document.getElementById('footer');
+
+        function checkMarqueePosition() {
+            const footerRect = footer.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            if (footerRect.top <= windowHeight) {
+                marqueeContainer.style.opacity = '0';
+            } else {
+                marqueeContainer.style.opacity = '1';
+            }
+        }
+
+        window.addEventListener('scroll', checkMarqueePosition);
+    </script>
+</body>
+
+</html>

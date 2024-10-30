@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get In Touch - Sky Gazing</title>
+    <link rel="icon" type="image/png" href="assets/logoend.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("assets/contactus.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .aos-init[data-aos].aos-animate {
+            transform: unset;
+        }
+
+        /* Navbar */
+
+        .navbar {
+            --bs-navbar-toggler-border-color: #37b6ff;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2855, 182, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        .nav-link {
+            color: white;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus {
+            color: #37b6ff;
+        }
+
+        .navbar-nav .nav-link.active,
+        .navbar-nav .nav-link.show {
+            color: #37b6ff;
+        }
+
+        .nav-item {
+            margin: 0 10px;
+        }
+
+        .dropdown-item {
+            color: white;
+
+        }
+
+        .dropdown-menu {
+            --bs-dropdown-bg: #2b2b2b;
+            --bs-dropdown-border-color: #37b6ff;
+
+        }
+
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: #37b6ff;
+            color: white;
+        }
+
+        /* custom  */
+
+        .social {
+            padding: 10px;
+            transition: all ease-in-out 0.3s;
+            display: inline-block;
+            perspective: 1000px;
+
+        }
+
+        .social svg {
+            display: block;
+            transition: transform 1s;
+            transform-style: preserve-3d;
+
+        }
+
+        .social:hover svg {
+            transform: rotateY(360deg);
+        }
+
+        .social:hover {
+            border-radius: 100%;
+            -webkit-box-shadow: 0px 0px 47px 1px rgba(55, 182, 255, 0.89);
+            -moz-box-shadow: 0px 0px 47px 1px rgba(55, 182, 255, 0.89);
+            box-shadow: 0px 0px 47px 1px rgba(55, 182, 255, 0.89);
+        }
+
+
+        .m-6 {
+            margin: 80px 100px;
+        }
+
+        .btn-primary {
+            background-color: #37b6ff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #37b6ffb2;
+        }
+
+        .cs-shadow {
+            -webkit-box-shadow: 0px 0px 13px -1px rgba(255, 255, 255, 1);
+            -moz-box-shadow: 0px 0px 13px -1px rgba(255, 255, 255, 1);
+            box-shadow: 0px 0px 13px -1px rgba(255, 255, 255, 1);
+        }
+
+        .border-color {
+            border: 2px solid #37b6ff;
+        }
+
+        iframe {
+            filter: invert(100%);
+        }
+
+        .form-control::-webkit-input-placeholder {
+            color: rgb(255, 255, 255);
+            opacity: 0.8;
+        }
+
+        /* marquee */
+        .marquee-container {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+
+        .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            color: #37b6ff;
+            font-size: 1.2rem;
+            font-family: 'Arial', sans-serif;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-------------------- NavBar -------------------->
+
+
+    <nav class="navbar navbar-expand-lg border-bottom" style="backdrop-filter: blur(10px);">
+        <div class="container">
+            <a class="navbar-brand text-white fs-3" data-aos="zoom-in" data-aos-duration="1500" href="index.html">
+                <img src="assets/logo5.png" alt="Logo" width="300" height="50" class="">
+            </a>
+
+            <button class="navbar-toggler" data-aos="zoom-in" data-aos-duration="1500" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav ms-auto" data-aos="zoom-in" data-aos-duration="1500">
+
+                    <li class="nav-item text-center">
+                        <a class="nav-link" aria-current="page" href="index.html">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                            </svg><br>Home</a>
+                    </li>
+
+                    <!-- Explore DropDown -->
+                    <li class="nav-item dropdown rounded text-center">
+                        <a class="nav-link text-center dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-binoculars-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M4.5 1A1.5 1.5 0 0 0 3 2.5V3h4v-.5A1.5 1.5 0 0 0 5.5 1zM7 4v1h2V4h4v.882a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V13H9v-1.5a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5V13H1V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882V4zM1 14v.5A1.5 1.5 0 0 0 2.5 16h3A1.5 1.5 0 0 0 7 14.5V14zm8 0v.5a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5-1.5V14zm4-11H9v-.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5z" />
+                            </svg><br>Explore
+                        </a>
+                        <ul class="dropdown-menu ">
+                            <li><a class="dropdown-item rounded-1" href="planets.html">
+                                    Planets</a></li>
+
+                            <li><a class="dropdown-item rounded-1" href="constellation.html">
+                                    Constellations</a></li>
+
+                            <li><a class="dropdown-item rounded-1" href="stargazing.html">
+                                    Star Gaze</a></li>
+
+                            <li><a class="dropdown-item rounded-1" href="comets.html">
+                                    Comets</a></li>
+                        </ul>
+                    </li>
+                    <!-- Explore DropDown END -->
+
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="insights.html">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-star-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                            </svg><br>Insights
+                        </a>
+                    </li>
+
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="obervatories.html">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                                <path
+                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                            </svg><br>Observatories</a>
+                    </li>
+
+                    <li class="nav-item text-center">
+                        <a class="nav-link active" href="#about">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-people-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+                            </svg><br>Get in Touch</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- usercount -->
+        <button type="button" class="rounded-circle bg-transparent border-0 d-none d-lg-block mx-5 position-relative">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#37b6ff" class="bi bi-person-rolodex"
+                viewBox="0 0 16 16">
+                <path d="M8 9.05a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+                <path
+                    d="M1 1a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h.5a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h.5a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H6.707L6 1.293A1 1 0 0 0 5.293 1zm0 1h4.293L6 2.707A1 1 0 0 0 6.707 3H15v10h-.085a1.5 1.5 0 0 0-2.4-.63C11.885 11.223 10.554 10 8 10c-2.555 0-3.886 1.224-4.514 2.37a1.5 1.5 0 0 0-2.4.63H1z" />
+            </svg>
+            <span id="usercount"
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                99+
+                <span class="visually-hidden">unread messages</span>
+            </span>
+        </button>
+    </nav>
+
+
+    <!-- Contact Us -->
+    <div class="container" style="margin-bottom: 8%; margin-top: 15%;">
+        <h1 class="display-3 text-center fw-bold" data-aos="zoom-in" data-aos-duration="1000"
+            style="color: #37b6ff; padding-bottom: 8%; ">Contact
+            Us
+        </h1>
+        <div class="row mt-5 rounded-5 p-4 mx-1 mx-md-0 cs-shadow border-color" data-aos="zoom-in"
+            style="background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);">
+            <div class="col-12">
+                <div class="row py-3 g-4">
+                    <div class="col-lg-4 col-12 text-white gap-3 py-2" data-aos="fade-up" data-aos-duration="600">
+                        <div class="d-flex align-items-start gap-3 pe-5 pe-sm-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="70" height="43" fill="#37b6ff"
+                                class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                            </svg>
+                            <div class="pt-2">
+                                <h5 class="fw-bold pb-2">Physical Address&ZeroWidthSpace;</h5>
+                                <p class=" mb-0">A 563, Main Shahrah-e-Usman, Sector 11-A Sector 11 A North Karachi Twp,
+                                    Karachi, Karachi City,
+                                    Sindh 75850</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-12 text-white py-2">
+                        <div class="d-flex align-items-start gap-3 ps-0 ps-md-5" data-aos="fade-up"
+                            data-aos-duration="600">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="43" fill="#37b6ff"
+                                class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
+                            </svg>
+                            <div class="pt-2">
+                                <h5 class="fw-bold pb-2">Phone Number&ZeroWidthSpace;</h5>
+                                <p class=" mb-0">+92 123 456789</p>
+                                <p class=" mb-0">+92 987 654321</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-12 text-white py-2">
+                        <div class="d-flex align-items-start gap-3" data-aos="fade-up" data-aos-duration="600">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="43" fill="#37b6ff"
+                                class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2zm-2 9.8V4.698l5.803 3.546zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.5 4.5 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586zM16 9.671V4.697l-5.803 3.546.338.208A4.5 4.5 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671" />
+                                <path
+                                    d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791" />
+                            </svg>
+                            <div class="pt-2">
+                                <h5 class="fw-bold pb-2">Email Address&ZeroWidthSpace;</h5>
+                                <p class=" mb-0">aptechnorthkarachi@edu.com.pk</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- contact form -->
+
+
+    <div class="container p-4 my-5 rounded-5 cs-shadow border-color"
+        style=" background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);">
+        <div class="row align-items-center g-4 g-md-5">
+            <div class="col-lg-6 col-12">
+                <div class="ratio ratio-1x1">
+                    <iframe data-aos="zoom-in" data-aos-duration="500"
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14466.136769377172!2d67.0652637!3d24.9819581!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb340e584b891c3%3A0x29b2cbc198ba2dbd!2sAptech%20Computer%20Education%20North%20Karachi%20Center!5e0!3m2!1sen!2s!4v1728553324413!5m2!1sen!2s"
+                        class="border-0 rounded-4" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12" data-aos="fade-up" data-aos-duration="500">
+                <div class="mb-5">
+                    <h2 class="fw-bold" style="color: #37b6ff;">Send us a message</h2>
+                </div>
+                <form class="row g-5 text-white">
+                    <div class="col-md-6" data-aos="fade-up" data-aos-duration="500">
+                        <label for="" class="form-label">First Name</label>
+                        <input type="text" class="form-control py-2 border-color bg-transparent text-white">
+                    </div>
+                    <div class="col-md-6" data-aos="fade-up" data-aos-duration="600">
+                        <label for="" class="form-label">Last Name</label>
+                        <input type="text" class="form-control py-2 border-color bg-transparent text-white">
+                    </div>
+                    <div class="col-md-6" data-aos="fade-up" data-aos-duration="700">
+                        <label for="" class="form-label">Email Address</label>
+                        <input type="email" class="form-control py-2 border-color bg-transparent text-white">
+                    </div>
+                    <div class="col-md-6" data-aos="fade-up" data-aos-duration="800">
+                        <label for="" class="form-label">Phone Number</label>
+                        <input type="number" class="form-control py-2 border-color bg-transparent text-white"
+                            id="inputNumber">
+                    </div>
+                    <div class="col-12" data-aos="fade-up" data-aos-duration="900">
+                        <label for="" class="form-label">Subject</label>
+                        <input type="text" class="form-control py-2 border-color bg-transparent text-white">
+                    </div>
+                    <div class="col-12" data-aos="fade-up" data-aos-duration="1000">
+                        <label for="" class="form-label">Message</label>
+                        <textarea class="form-control py-2 border-color bg-transparent text-white" rows="6"></textarea>
+                    </div>
+                    <div class="col-12" data-aos="fade-up" data-aos-duration="1100"><button type="submit"
+                            class="btn btn-primary rounded">Send Message</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- subscribe event -->
+
+    <div class="container py-5 mt-5">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-8 col-md-10 col-12">
+                <div class="text-center">
+                    <h1 class="fw-bold aos-init aos-animate" data-aos="fade-up" data-aos-duration="600"
+                        style="color: #37b6ff;">Stay Connected</h1>
+                    <p data-aos="fade-up" data-aos-duration="600" class="mb-5 text-white-50 lead aos-init aos-animate">
+                        Subscribe to Our Newsletter for Exclusive Updates</p>
+                    <form class="d-flex gap-3  aos-init aos-animate" data-aos="fade-up" data-aos-duration="700">
+                        <input id="sub" class="form-control py-2 border-color bg-transparent text-white" type="email"
+                            placeholder="Email Address">
+                        <button class="btn btn-primary btn-lg">
+                            SUBSCRIBE
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- marquee -->
+    <div class="marquee-container" id="marqueeContainer">
+        <div class="marquee">
+            🌌 Welcome to our Sky Gazing website! Discover the wonders of the universe: Learn about planets,
+            constellations, comets, and upcoming celestial events! 🌠
+        </div>
+    </div>
+
+    <!-- Footer  -->
+    <div id="footer" class="container-fluid border-top pt-4 text-white"
+        style="margin-top: 8%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);">
+        <div class="container text-center">
+            <div class="row-1 my-3" data-aos="fade-up">
+                <div class="col d-flex justify-content-center">
+
+                    <a href="https://www.facebook.com/" target="_blank" class="nav-link m-2 social">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-facebook" viewBox="0 0 16 16">
+                            <path
+                                d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/" target="_blank" class="nav-link m-2 social">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-instagram" viewBox="0 0 16 16">
+                            <path
+                                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/?lang=en" class="nav-link m-2 social" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-twitter-x" viewBox="0 0 16 16">
+                            <path
+                                d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="col my-3">
+
+                    <p>A 563, Main Shahrah-e-Usman, Sector 11-A Sector 11 A North Karachi Twp, Karachi, Karachi City,
+                        Sindh 75850
+                    </p>
+                    <p><i class="fas fa-phone" style="color: #37b6ff; font-size: 18px;"></i>&nbsp; +92 123-456789
+                        &nbsp;&nbsp;|&nbsp;&nbsp; <i class="fas fa-envelope"
+                            style="color: #37b6ff; font-size: 18px;"></i>
+                        &nbsp;aptechnorthkarachi@edu.com.pk</p>
+                </div>
+
+                <div class="col d-flex justify-content-center">
+                    <a class="navbar-brand text-white fs-3  " href="index.html">
+                        <img src="assets/logo5.png" alt="Logo" width="300" height="50" class="">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container text-center">
+            <p class="py-2 border-top" style="margin-bottom: 0;">All Rights Reserved By Sky Gazing</p>
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script>
+        for (var i = 1; i <= 500; i++) {
+            (function (index) {
+                setTimeout(function () {
+                    document.getElementById('usercount').innerHTML = index;
+                }, index * 3);
+            })(i);
+        }
+    </script>
+    <script>
+        const marqueeContainer = document.getElementById('marqueeContainer');
+        const footer = document.getElementById('footer');
+
+        function checkMarqueePosition() {
+            const footerRect = footer.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            if (footerRect.top <= windowHeight) {
+                marqueeContainer.style.opacity = '0';
+            } else {
+                marqueeContainer.style.opacity = '1';
+            }
+        }
+
+        window.addEventListener('scroll', checkMarqueePosition);
+    </script>
+</body>
+
+</html>

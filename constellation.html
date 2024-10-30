@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Constellations - Sky Gazing</title>
+    <link rel="icon" type="image/png" href="assets/logoend.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("assets/bgcon1.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: "Poppins", sans-serif;
+        }
+
+        /* Navbar */
+
+        .navbar {
+            --bs-navbar-toggler-border-color: #37b6ff;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2855, 182, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        .nav-link {
+            color: white;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus {
+            color: #37b6ff;
+        }
+
+        .navbar-nav .nav-link.active,
+        .navbar-nav .nav-link.show {
+            color: #37b6ff;
+        }
+
+        .nav-item {
+            margin: 0 10px;
+        }
+
+        .dropdown-item {
+            color: white;
+
+        }
+
+        .dropdown-menu {
+            --bs-dropdown-bg: #2b2b2b;
+        }
+
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: #37b6ff;
+            color: white;
+
+        }
+
+        .dropdown-item.active {
+            background-color: #37b6ff;
+        }
+
+        /* cards */
+        .card {
+            width: 280px;
+            height: 400px;
+            border-radius: 15px;
+            position: relative;
+            transition: 0.4s ease-out;
+            overflow: hidden;
+            /* Make sure the overflow is hidden */
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            cursor: pointer;
+        }
+
+        .card:hover:before {
+            opacity: 1;
+        }
+
+        .card:hover .info {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            /* Adjusting the background opacity */
+            backdrop-filter: blur(5px);
+            z-index: 2;
+            transition: 0.5s;
+            opacity: 0;
+        }
+
+        .card img {
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: transform 0.5s;
+        }
+
+        .card:hover img {
+            transform: scale(1.1);
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            z-index: 3;
+            color: white;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.5s;
+            text-align: center;
+        }
+
+        .card .info p {
+            font-size: 15px;
+            margin-top: 8px;
+            text-align: justify;
+        }
+
+        /* custom  */
+
+        .social {
+            padding: 10px;
+            transition: all ease-in-out 0.3s;
+            display: inline-block;
+            perspective: 1000px;
+
+        }
+
+        .social svg {
+            display: block;
+            transition: transform 1s;
+            transform-style: preserve-3d;
+
+        }
+
+        .social:hover svg {
+            transform: rotateY(360deg);
+        }
+
+        .social:hover {
+            border-radius: 100%;
+            -webkit-box-shadow: 0px 0px 47px 1px rgba(55, 182, 255, 0.89);
+            -moz-box-shadow: 0px 0px 47px 1px rgba(55, 182, 255, 0.89);
+            box-shadow: 0px 0px 47px 1px rgba(55, 182, 255, 0.89);
+        }
+
+
+        .m-6 {
+            margin: 80px 100px;
+        }
+
+        .btn-primary {
+            background-color: #37b6ff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #37b6ffb2;
+        }
+
+        .cs-shadow {
+            -webkit-box-shadow: 0px 0px 13px -1px rgba(255, 255, 255, 1);
+            -moz-box-shadow: 0px 0px 13px -1px rgba(255, 255, 255, 1);
+            box-shadow: 0px 0px 13px -1px rgba(255, 255, 255, 1);
+        }
+
+
+        .csrounded {
+            border-top-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+        }
+
+        .border-color {
+            border: 2px solid #37b6ff;
+        }
+
+        /* marquee */
+        .marquee-container {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+
+        .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            color: #37b6ff;
+            font-size: 1.2rem;
+            font-family: 'Arial', sans-serif;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-------------------- NavBar -------------------->
+
+
+    <nav class="navbar navbar-expand-lg border-bottom" style="backdrop-filter: blur(10px);">
+        <div class="container">
+            <a class="navbar-brand text-white fs-3  " href="index.html" data-aos="zoom-in" data-aos-duration="1500">
+                <img src="assets/logo5.png" alt="Logo" width="300" height="50" class="">
+            </a>
+
+            <button class="navbar-toggler" data-aos="zoom-in" data-aos-duration="1500" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav ms-auto" data-aos="zoom-in" data-aos-duration="1500">
+
+                    <li class="nav-item text-center">
+                        <a class="nav-link" aria-current="page" href="index.html">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                            </svg><br>Home</a>
+                    </li>
+
+                    <!-- Explore DropDown -->
+                    <li class="nav-item dropdown rounded text-center">
+                        <a class="nav-link active text-center dropdown-toggle" style="color: #37b6ff;" href="#"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-binoculars-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M4.5 1A1.5 1.5 0 0 0 3 2.5V3h4v-.5A1.5 1.5 0 0 0 5.5 1zM7 4v1h2V4h4v.882a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V13H9v-1.5a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5V13H1V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882V4zM1 14v.5A1.5 1.5 0 0 0 2.5 16h3A1.5 1.5 0 0 0 7 14.5V14zm8 0v.5a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5-1.5V14zm4-11H9v-.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5z" />
+                            </svg><br>Explore
+                        </a>
+                        <ul class="dropdown-menu ">
+                            <li><a class="dropdown-item rounded-1" href="planets.html">
+                                    Planets</a></li>
+
+                            <li><a class="dropdown-item active rounded-1" href="constellation.html">
+                                    Constellations</a></li>
+
+                            <li><a class="dropdown-item rounded-1" href="stargazing.html">
+                                    Star Gaze</a></li>
+
+                            <li><a class="dropdown-item rounded-1" href="comets.html">
+                                    Comets</a></li>
+                        </ul>
+                    </li>
+                    <!-- Explore DropDown END -->
+
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="insights.html">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-star-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                            </svg><br>Insights
+                        </a>
+                    </li>
+
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="obervatories.html">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                                <path
+                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                            </svg><br>Observatories</a>
+                    </li>
+
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="getintouch.html">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-people-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+                            </svg><br>Get in Touch</a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+        <!-- usercount -->
+        <button type="button" class="rounded-circle bg-transparent border-0 d-none d-lg-block mx-5 position-relative">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#37b6ff" class="bi bi-person-rolodex"
+                viewBox="0 0 16 16">
+                <path d="M8 9.05a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+                <path
+                    d="M1 1a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h.5a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h.5a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H6.707L6 1.293A1 1 0 0 0 5.293 1zm0 1h4.293L6 2.707A1 1 0 0 0 6.707 3H15v10h-.085a1.5 1.5 0 0 0-2.4-.63C11.885 11.223 10.554 10 8 10c-2.555 0-3.886 1.224-4.514 2.37a1.5 1.5 0 0 0-2.4.63H1z" />
+            </svg>
+            <span id="usercount"
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                99+
+                <span class="visually-hidden">unread messages</span>
+            </span>
+        </button>
+    </nav>
+
+    <!-- intro -->
+
+    <div class="container mx-auto align-content-center px-3 " data-aos="fade-right" data-aos-duration="1500"
+        style="padding-bottom: 10%; margin-top: 18%; text-align: justify;">
+        <h1 class="display-5 fw-bold mb-3 text-center text-md-start" style="color: #37b6ff;">Explore the
+            Wonders of Constellations</h1>
+        <p class="text-white fs-4" style="text-align: justify;">Constellations are groups of stars that form
+            recognizable patterns in the
+            night sky. They
+            have been used for centuries by different cultures for navigation, storytelling, and to mark the
+            passage of time. Each constellation holds unique myths and meanings, connecting us to our celestial
+            heritage and the vastness of the universe.</p>
+        <div class="d-flex justify-content-center justify-content-md-start">
+            <a href="#cardsec" type="button" class="btn btn-primary btn-lg fw-semibold px-5">Start Exploring</a>
+        </div>
+    </div>
+
+
+
+
+    <!-- Constellation Cards -->
+    <div id="cardsec" class="m-6" style="border-bottom: 1px solid #ffffff;"></div>
+    <h1 class="display-5 fw-bold text-center" data-aos="zoom-in" data-aos-duration="500" style="color: #37b6ff;">
+        Constellations</h1>
+
+    <div class="container p-4 rounded-5 my-5 cs-shadow border-color" data-aos="zoom-in"
+        style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">
+        <div class="row my-5 mx-auto row-col-1 row-cols-md-2 row-cols-lg-3 gy-5">
+
+            <!-- Card for Aries -->
+            <div class="col d-flex justify-content-center">
+                <div class="card border-color custom-card cs-shadow" data-aos="fade-up" data-aos-duration="1000"
+                    data-bs-toggle="modal" data-bs-target="#modalAries">
+                    <img src="assets/aries.jpg" class="" alt="Aries">
+                    <div class="info">
+                        <h3 class="card-title text-bold" style="color: #37b6ff;">Aries</h3>
+                        <p class="">Aries, symbolizing the Ram, represents courage and leadership. It is home to the
+                            bright star Hamal, lying about 66 light-years from Earth. Aries is often associated with
+                            determination and boldness, embodying the spirit of action and drive.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for Taurus -->
+            <div class="col d-flex justify-content-center">
+                <div class="card border-color custom-card cs-shadow" data-aos="fade-up" data-aos-duration="1200"
+                    data-bs-toggle="modal" data-bs-target="#modalTaurus">
+                    <img src="assets/tauras.jpg" class="" alt="Taurus">
+                    <div class="info">
+                        <h3 class="card-title text-bold" style="color: #37b6ff;">Taurus</h3>
+                        <p class="">Taurus, represented by the Bull, symbolizes strength and stability. It contains the
+                            bright star Aldebaran and the beautiful Pleiades cluster. This constellation is connected
+                            with determination and persistence, highlighting endurance and reliability.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for Gemini -->
+            <div class="col d-flex justify-content-center">
+                <div class="card border-color custom-card cs-shadow" data-aos="fade-up" data-aos-duration="1400"
+                    data-bs-toggle="modal" data-bs-target="#modalGemini">
+                    <img src="assets/gemini.jpg" class="" alt="Gemini">
+                    <div class="info">
+                        <h3 class="card-title text-bold" style="color: #37b6ff;">Gemini</h3>
+                        <p class="">Gemini, symbolized by the Twins, represents duality and companionship. It is home to
+                            the bright stars Castor and Pollux, which are about 50 light-years from Earth. Gemini is
+                            often associated with communication and adaptability, reflecting curiosity and versatility.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for Cancer -->
+            <div class="col d-flex justify-content-center">
+                <div class="card border-color custom-card cs-shadow" data-aos="fade-up" data-aos-duration="1000"
+                    data-bs-toggle="modal" data-bs-target="#modalCancer">
+                    <img src="assets/cancer.jpg" class="" alt="Cancer">
+                    <div class="info">
+                        <h3 class="card-title text-bold" style="color: #37b6ff;">Cancer</h3>
+                        <p class="">Cancer, symbolizing the Crab, represents protection and nurturing. It is home to the
+                            open cluster Praesepe, also known as the Beehive Cluster. This constellation is often linked
+                            to sensitivity and care, reflecting emotional depth and resilience.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for Leo -->
+            <div class="col d-flex justify-content-center">
+                <div class="card border-color custom-card cs-shadow" data-aos="fade-up" data-aos-duration="1200"
+                    data-bs-toggle="modal" data-bs-target="#modalLeo">
+                    <img src="assets/leo.jpg" class="" alt="Leo">
+                    <div class="info">
+                        <h3 class="card-title text-bold" style="color: #37b6ff;">Leo</h3>
+                        <p class="">Leo, represented by the Lion, symbolizes courage and royalty. It contains the bright
+                            star Regulus, around 79 light-years from Earth. Leo is often associated with leadership and
+                            confidence, embodying power and generosity.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for Virgo -->
+            <div class="col d-flex justify-content-center">
+                <div class="card border-color custom-card cs-shadow" data-aos="fade-up" data-aos-duration="1400"
+                    data-bs-toggle="modal" data-bs-target="#modalVirgo">
+                    <img src="assets/virgo.jpg" class="" alt="Virgo">
+                    <div class="info">
+                        <h3 class="card-title text-bold" style="color: #37b6ff;">Virgo</h3>
+                        <p class="">Virgo, symbolized by the Maiden, represents fertility and wisdom. It is home to the
+                            bright star Spica, located about 260 light-years from Earth. Virgo is connected with
+                            analysis and service, reflecting precision and attention to detail.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for Libra -->
+            <div class="col d-flex justify-content-center">
+                <div class="card border-color custom-card cs-shadow" data-aos="fade-up" data-aos-duration="1000"
+                    data-bs-toggle="modal" data-bs-target="#modalLibra">
+                    <img src="assets/libra.jpg" class="" alt="Libra">
+                    <div class="info">
+                        <h3 class="card-title text-bold" style="color: #37b6ff;">Libra</h3>
+                        <p class="">Libra, represented by the Scales, symbolizes balance and harmony. It is home to the
+                            bright star Zubenelgenubi, located around 75 light-years from Earth. This constellation is
+                            often associated with justice and equilibrium, reflecting the importance of fairness and
+                            partnership.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for Scorpius -->
+            <div class="col d-flex justify-content-center">
+                <div class="card border-color custom-card cs-shadow" data-aos="fade-up" data-aos-duration="1200"
+                    data-bs-toggle="modal" data-bs-target="#modalScorpio">
+                    <img src="assets/scorpius.jpg" class="" alt="Scorpio">
+                    <div class="info">
+                        <h3 class="card-title text-bold" style="color: #37b6ff;">Scorpius</h3>
+                        <p class="">Scorpius, symbolizing the Scorpion, represents intensity and passion. It is home to
+                            the bright star Antares, a supergiant located about 550 light-years away. Scorpius is often
+                            linked to transformation and power, symbolizing determination and emotional depth.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for Sagittarius -->
+            <div class="col d-flex justify-content-center">
+                <div class="card border-color custom-card cs-shadow" data-aos="fade-up" data-aos-duration="1400"
+                    data-bs-toggle="modal" data-bs-target="#modalSagittarius">
+                    <img src="assets/sagittarius.jpg" class="" alt="Sagittarius">
+                    <div class="info">
+                        <h3 class="card-title text-bold" style="color: #37b6ff;">Sagittarius</h3>
+                        <p class="">Sagittarius, symbolized by the Archer, represents exploration and wisdom. It is home
+                            to the bright star Kaus Australis and the center of the Milky Way galaxy. This constellation
+                            is often connected with adventure and knowledge, reflecting a quest for truth.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for Capricorn -->
+            <div class="col d-flex justify-content-center">
+                <div class="card border-color custom-card cs-shadow" data-aos="fade-up" data-aos-duration="1000"
+                    data-bs-toggle="modal" data-bs-target="#modalCapricorn">
+                    <img src="assets/capricorn.jpg" class="" alt="Capricorn">
+                    <div class="info">
+                        <h3 class="card-title text-bold" style="color: #37b6ff;">Capricorn</h3>
+                        <p class="">Capricorn, represented by the Sea Goat, symbolizes discipline and ambition. It
+                            contains the star Dabih, located about 328 light-years from Earth. Capricorn is often
+                            associated with determination and responsibility, embodying a balance of practicality and
+                            ambition.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for Aquarius -->
+            <div class="col d-flex justify-content-center">
+                <div class="card border-color custom-card cs-shadow" data-aos="fade-up" data-aos-duration="1200"
+                    data-bs-toggle="modal" data-bs-target="#modalAquarius">
+                    <img src="assets/aquaruis.jpg" class="" alt="Aquarius">
+                    <div class="info">
+                        <h3 class="card-title text-bold" style="color: #37b6ff;">Aquarius</h3>
+                        <p class="">Aquarius, symbolizing the Water Bearer, represents innovation and vision. It is home
+                            to the star Sadalsuud, around 540 light-years from Earth. Aquarius is often connected with
+                            progress and individuality, reflecting forward-thinking and humanitarian ideals.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for Pisces -->
+            <div class="col d-flex justify-content-center">
+                <div class="card border-color custom-card cs-shadow" data-aos="fade-up" data-aos-duration="1400"
+                    data-bs-toggle="modal" data-bs-target="#modalPisces">
+                    <img src="assets/pisces.jpg" class="" alt="Pisces">
+                    <div class="info">
+                        <h3 class="card-title text-bold" style="color: #37b6ff;">Pisces</h3>
+                        <p class="">Pisces, represented by two Fish, symbolizes compassion and intuition. It contains
+                            the star Alrescha, lying about 139 light-years away. This constellation is often linked to
+                            empathy and imagination, embodying a deep connection to emotions and creativity.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cards End -->
+
+    <!-- Modals Constellations -->
+    <div>
+        <!-- M Aries -->
+        <div class="modal fade" id="modalAries" tabindex="-1" aria-labelledby="modalAriesLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: #37b6ff;">Aries - The Ram Constellation</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-white">
+                        <h6 style="color: #37b6ff;">General Information:</h6>
+                        <p><strong>Location:</strong> Aries is located in the Northern Hemisphere and is visible between
+                            latitudes +90° and -60°.</p>
+                        <p><strong>Right Ascension:</strong> 3 hours</p>
+                        <p><strong>Declination:</strong> +20 degrees</p>
+                        <p><strong>Area:</strong> 441 square degrees, making it the 39th largest constellation in the
+                            sky.
+                        </p>
+
+                        <h6 style="color: #37b6ff;">Distance and Key Features:</h6>
+                        <ul>
+                            <li><strong>Distance from Earth:</strong> The stars in Aries range from 50 to 500
+                                light-years
+                                away.</li>
+                            <li><strong>Notable Stars:</strong>
+                                <ul>
+                                    <li><strong>Hamal (Alpha Arietis):</strong> The brightest star in Aries, located
+                                        about
+                                        66 light-years away. It is a giant star about 91 times more luminous than the
+                                        Sun.
+                                    </li>
+                                    <li><strong>Sheratan (Beta Arietis):</strong> A binary star system about 59
+                                        light-years
+                                        from Earth.</li>
+                                    <li><strong>Mesarthim (Gamma Arietis):</strong> A binary star system known as one of
+                                        the
+                                        first double stars discovered by telescopic observation.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Notable Deep Sky Objects:</strong>
+                                <ul>
+                                    <li><strong>NGC 772:</strong> A spiral galaxy about 130 million light-years away,
+                                        notable for its asymmetrical shape.</li>
+                                    <li><strong>NGC 1156:</strong> A dwarf irregular galaxy around 25 million
+                                        light-years
+                                        from Earth.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h6 style="color: #37b6ff;">Mythology:</h6>
+                        <p>Aries is associated with the myth of the golden ram that rescued Phrixus and Helle. The ram
+                            was
+                            later sacrificed, and its golden fleece was given to King Aeëtes, becoming the prize sought
+                            by
+                            Jason and the Argonauts.</p>
+
+                        <h6 style="color: #37b6ff;">Visibility:</h6>
+                        <p>The Aries constellation is best viewed in the night sky during November and December. It is
+                            relatively faint, so it can be difficult to spot in areas with light pollution, but it is
+                            situated between Pisces and Taurus.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- M Taurus -->
+        <div class="modal fade" id="modalTaurus" tabindex="-1" aria-labelledby="modalTaurusLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: #37b6ff;">Taurus - The Bull Constellation</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-white">
+                        <h6 style="color: #37b6ff;">General Information:</h6>
+                        <p><strong>Location:</strong> Taurus is a prominent constellation in the Northern Hemisphere and
+                            is
+                            visible between latitudes +90° and -65°.</p>
+                        <p><strong>Right Ascension:</strong> 4 hours</p>
+                        <p><strong>Declination:</strong> +15 degrees</p>
+                        <p><strong>Area:</strong> 797 square degrees, making it the 17th largest constellation in the
+                            sky.
+                        </p>
+
+                        <h6 style="color: #37b6ff;">Distance and Key Features:</h6>
+                        <ul>
+                            <li><strong>Distance from Earth:</strong> The stars in Taurus range from 65 to 440
+                                light-years
+                                away.</li>
+                            <li><strong>Notable Stars:</strong>
+                                <ul>
+                                    <li><strong>Aldebaran (Alpha Tauri):</strong> The brightest star in Taurus, a red
+                                        giant
+                                        located about 65 light-years away. It is one of the largest visible stars and is
+                                        often called the "Eye of the Bull."</li>
+                                    <li><strong>Elnath (Beta Tauri):</strong> The second-brightest star in Taurus,
+                                        marking
+                                        one of the horns of the bull, located about 134 light-years from Earth.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Notable Deep Sky Objects:</strong>
+                                <ul>
+                                    <li><strong>The Pleiades (M45):</strong> An open star cluster, one of the nearest to
+                                        Earth at around 440 light-years away, consisting of over 800 stars and often
+                                        referred to as the "Seven Sisters."</li>
+                                    <li><strong>The Hyades:</strong> The closest open star cluster to Earth,
+                                        approximately
+                                        153 light-years away, forming a distinctive V-shape in the sky near Aldebaran.
+                                    </li>
+                                    <li><strong>Crab Nebula (M1):</strong> A supernova remnant located 6,500 light-years
+                                        away, formed from a stellar explosion observed in 1054 AD.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h6 style="color: #37b6ff;">Mythology:</h6>
+                        <p>Taurus is associated with several myths, most notably that of Zeus transforming into a bull
+                            to
+                            abduct Europa, a Phoenician princess. It is also associated with the myth of the Cretan Bull
+                            in
+                            the Labors of Hercules.</p>
+
+                        <h6 style="color: #37b6ff;">Visibility:</h6>
+                        <p>Taurus is best visible in the evening sky from November to March. It is easily identified by
+                            the
+                            V-shaped grouping of the Hyades star cluster, with Aldebaran shining brightly at its
+                            forefront.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- M Gemini -->
+        <div class="modal fade" id="modalGemini" tabindex="-1" aria-labelledby="modalGeminiLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: #37b6ff;">Gemini - The Twins Constellation</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-white">
+                        <h6 style="color: #37b6ff;">General Information:</h6>
+                        <p><strong>Location:</strong> Gemini is a prominent constellation located in the Northern
+                            Hemisphere, visible between latitudes +90° and -60°.</p>
+                        <p><strong>Right Ascension:</strong> 7 hours</p>
+                        <p><strong>Declination:</strong> +20 degrees</p>
+                        <p><strong>Area:</strong> 514 square degrees, making it the 30th largest constellation in the
+                            sky.
+                        </p>
+
+                        <h6 style="color: #37b6ff;">Distance and Key Features:</h6>
+                        <ul>
+                            <li><strong>Distance from Earth:</strong> The stars in Gemini range between 34 and 1,500
+                                light-years away.</li>
+                            <li><strong>Notable Stars:</strong>
+                                <ul>
+                                    <li><strong>Castor (Alpha Geminorum):</strong> A multiple star system located about
+                                        51
+                                        light-years from Earth. It consists of six individual stars grouped into three
+                                        binary systems.</li>
+                                    <li><strong>Pollux (Beta Geminorum):</strong> The brightest star in Gemini, located
+                                        about 34 light-years away, and is an orange giant with an exoplanet in its
+                                        orbit.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><strong>Notable Deep Sky Objects:</strong>
+                                <ul>
+                                    <li><strong>Eskimo Nebula (NGC 2392):</strong> A planetary nebula about 2,870
+                                        light-years away, resembling the face of a person wearing a fur hood.</li>
+                                    <li><strong>Medusa Nebula:</strong> A large planetary nebula located around 1,500
+                                        light-years away in the direction of the Gemini constellation.</li>
+                                    <li><strong>M35 (Messier 35):</strong> An open cluster of stars located about 2,800
+                                        light-years away, containing hundreds of stars spread over 24 light-years.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h6 style="color: #37b6ff;">Mythology:</h6>
+                        <p>The constellation Gemini represents the twins Castor and Pollux from Greek mythology. Castor
+                            was
+                            mortal, while Pollux was immortal. They are celebrated as the twin brothers who helped
+                            sailors
+                            and are the patrons of sailors and voyagers.</p>
+
+                        <h6 style="color: #37b6ff;">Visibility:</h6>
+                        <p>Gemini is best visible in the Northern Hemisphere during the winter months, from November to
+                            April. The two bright stars, Castor and Pollux, make it easy to identify.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- M Cancer -->
+        <div class="modal fade" id="modalCancer" tabindex="-1" aria-labelledby="modalCancerLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: #37b6ff;">Cancer - The Crab Constellation</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-white">
+                        <h6 style="color: #37b6ff;">General Information:</h6>
+                        <p><strong>Location:</strong> Cancer is located in the Northern Hemisphere. It is visible
+                            between
+                            latitudes +90° and -60°.</p>
+                        <p><strong>Right Ascension:</strong> 8 hours</p>
+                        <p><strong>Declination:</strong> +20 degrees</p>
+                        <p><strong>Area:</strong> 506 square degrees, ranking it 31st in size among the constellations.
+                        </p>
+
+                        <h6 style="color: #37b6ff;">Distance and Key Features:</h6>
+                        <ul>
+                            <li><strong>Distance from Earth:</strong> The stars in the Cancer constellation range from
+                                290
+                                to 600 light-years away.</li>
+                            <li><strong>Notable Stars:</strong>
+                                <ul>
+                                    <li><strong>Beta Cancri (Altarf):</strong> The brightest star in Cancer, located
+                                        about
+                                        290 light-years away.</li>
+                                    <li><strong>Delta Cancri:</strong> Known for the famous "Beehive Cluster," an open
+                                        star
+                                        cluster (M44) that lies near it.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Notable Deep Sky Objects:</strong>
+                                <ul>
+                                    <li><strong>Beehive Cluster (M44):</strong> One of the nearest open clusters to
+                                        Earth,
+                                        located about 577 light-years away.</li>
+                                    <li><strong>Messier 67:</strong> Another open cluster about 2,700 light-years away,
+                                        one
+                                        of the oldest known star clusters.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h6 style="color: #37b6ff;">Mythology:</h6>
+                        <p>Cancer is traditionally associated with the story of the giant crab that attacked Heracles
+                            during
+                            his fight with the Hydra. Heracles crushed the crab, and Hera, the queen of the gods, placed
+                            the
+                            crab in the sky to honor its bravery.</p>
+
+                        <h6 style="color: #37b6ff;">Visibility:</h6>
+                        <p>The Cancer constellation is best visible in the night sky during the months of March and
+                            April.
+                            It can be spotted between Gemini and Leo and is relatively faint, so it is best observed in
+                            darker skies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- M Leo -->
+        <div class="modal fade" id="modalLeo" tabindex="-1" aria-labelledby="modalLeoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: #37b6ff;">Leo - The Lion Constellation</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-white">
+                        <h6 style="color: #37b6ff;">General Information:</h6>
+                        <p><strong>Location:</strong> Leo is one of the most recognizable constellations in the Northern
+                            Hemisphere, visible between latitudes +90° and -65°.</p>
+                        <p><strong>Right Ascension:</strong> 10 hours</p>
+                        <p><strong>Declination:</strong> +15 degrees</p>
+                        <p><strong>Area:</strong> 947 square degrees, making it the 12th largest constellation.</p>
+
+                        <h6 style="color: #37b6ff;">Distance and Key Features:</h6>
+                        <ul>
+                            <li><strong>Distance from Earth:</strong> The stars in Leo range between 36 and 3,000
+                                light-years away.</li>
+                            <li><strong>Notable Stars:</strong>
+                                <ul>
+                                    <li><strong>Regulus (Alpha Leonis):</strong> The brightest star in Leo, located
+                                        about 79
+                                        light-years away. It's a multiple star system consisting of four stars organized
+                                        into two pairs.</li>
+                                    <li><strong>Denebola (Beta Leonis):</strong> The second brightest star, located
+                                        about 36
+                                        light-years away, and is a white main-sequence star.</li>
+                                    <li><strong>Algieba (Gamma Leonis):</strong> A binary star system located 130
+                                        light-years from Earth. The two stars can be resolved with a small telescope.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><strong>Notable Deep Sky Objects:</strong>
+                                <ul>
+                                    <li><strong>Leo Triplet:</strong> A group of three interacting spiral galaxies (M65,
+                                        M66, and NGC 3628) located around 35 million light-years away.</li>
+                                    <li><strong>Messier 96 Group:</strong> A collection of galaxies located around 31
+                                        million light-years from Earth, including M95, M96, and M105.</li>
+                                    <li><strong>NGC 2903:</strong> A barred spiral galaxy about 30 million light-years
+                                        away
+                                        and is one of the brightest galaxies in the Leo constellation.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h6 style="color: #37b6ff;">Mythology:</h6>
+                        <p>Leo is associated with the Nemean Lion in Greek mythology, a ferocious lion with impenetrable
+                            skin that was killed by Hercules as one of his Twelve Labors. Leo is one of the oldest
+                            recognized constellations, and its depiction dates back to ancient Babylonian astronomy.</p>
+
+                        <h6 style="color: #37b6ff;">Visibility:</h6>
+                        <p>Leo is best visible in the Northern Hemisphere during the spring months, from late March to
+                            May.
+                            Its most recognizable feature is the "sickle" shape that represents the lion's head.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- M Virgo -->
+        <div class="modal fade" id="modalVirgo" tabindex="-1" aria-labelledby="modalVirgoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: #37b6ff;">Virgo - The Virgin Constellation</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-white">
+                        <h6 style="color: #37b6ff;">General Information:</h6>
+                        <p><strong>Location:</strong> Virgo is one of the largest constellations, lying in the southern
+                            celestial hemisphere, visible between latitudes +80° and -80°.</p>
+                        <p><strong>Right Ascension:</strong> 12 hours</p>
+                        <p><strong>Declination:</strong> -10 degrees</p>
+                        <p><strong>Area:</strong> 1294 square degrees, making it the second-largest constellation.</p>
+
+                        <h6 style="color: #37b6ff;">Distance and Key Features:</h6>
+                        <ul>
+                            <li><strong>Distance from Earth:</strong> The stars in Virgo vary in distance, with some
+                                being
+                                around 30 light-years away, while others are much farther.</li>
+                            <li><strong>Notable Stars:</strong>
+                                <ul>
+                                    <li><strong>Spica (Alpha Virginis):</strong> The brightest star in Virgo, located
+                                        approximately 250 light-years away. It is a binary star system and one of the 20
+                                        brightest stars in the sky.</li>
+                                    <li><strong>Virginis (Beta Virginis):</strong> Located about 36 light-years away,
+                                        it's a
+                                        yellow-white giant star.</li>
+                                    <li><strong>Gianfar (Gamma Virginis):</strong> Another notable star in Virgo, known
+                                        for
+                                        its bright appearance and relative proximity.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Notable Deep Sky Objects:</strong>
+                                <ul>
+                                    <li><strong>Virgo Cluster:</strong> A massive cluster of galaxies located about 50
+                                        million light-years away, including M87, which is notable for hosting a
+                                        supermassive
+                                        black hole.</li>
+                                    <li><strong>Messier 86:</strong> An elliptical galaxy that is part of the Virgo
+                                        Cluster
+                                        and is around 50 million light-years away.</li>
+                                    <li><strong>Messier 104 (Sombrero Galaxy):</strong> A spiral galaxy that is about 28
+                                        million light-years away, famous for its bright nucleus and distinctive dust
+                                        lane.
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h6 style="color: #37b6ff;">Mythology:</h6>
+                        <p>Virgo is often associated with various agricultural deities across different cultures,
+                            representing fertility and the harvest. In Greek mythology, Virgo is linked to Persephone,
+                            the
+                            goddess of the harvest and spring growth.</p>
+
+                        <h6 style="color: #37b6ff;">Visibility:</h6>
+                        <p>Virgo is best visible in the evening sky during the spring months, particularly from March to
+                            June, making it a popular target for stargazers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- M Libra -->
+        <div class="modal fade" id="modalLibra" tabindex="-1" aria-labelledby="modalLibraLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: #37b6ff;">Libra - The Scales Constellation</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-white">
+                        <h6 style="color: #37b6ff;">General Information:</h6>
+                        <p><strong>Location:</strong> Libra is situated in the southern celestial hemisphere, bordered
+                            by
+                            Virgo, Scorpius, and the Southern Cross. It can be seen between latitudes +65° and -90°.</p>
+                        <p><strong>Right Ascension:</strong> 15 hours</p>
+                        <p><strong>Declination:</strong> -15 degrees</p>
+                        <p><strong>Area:</strong> 538 square degrees, making it the 29th largest constellation.</p>
+
+                        <h6 style="color: #37b6ff;">Distance and Key Features:</h6>
+                        <ul>
+                            <li><strong>Distance from Earth:</strong> The stars in Libra vary in distance, with notable
+                                stars ranging from 40 to 100 light-years away.</li>
+                            <li><strong>Notable Stars:</strong>
+                                <ul>
+                                    <li><strong>Alpha Librae (Zubenelgenubi):</strong> The brightest star in Libra,
+                                        located
+                                        about 75 light-years away, known as a binary star system.</li>
+                                    <li><strong>Beta Librae (Zubeneschamali):</strong> Another prominent star in Libra,
+                                        it
+                                        is about 40 light-years away and is a blue-white giant star.</li>
+                                    <li><strong>Gamma Librae:</strong> A relatively faint star located around 150
+                                        light-years away.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Notable Deep Sky Objects:</strong>
+                                <ul>
+                                    <li><strong>Messier 4 (M4):</strong> A globular cluster located approximately 7,200
+                                        light-years away, one of the closest globular clusters to Earth.</li>
+                                    <li><strong>Messier 5 (M5):</strong> A globular cluster situated about 24,500
+                                        light-years away, famous for its bright core.</li>
+                                    <li><strong>Messier 19 (M19):</strong> A globular cluster approximately 33,000
+                                        light-years away.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h6 style="color: #37b6ff;">Mythology:</h6>
+                        <p>Libra represents the scales of justice and is often associated with the goddess of justice,
+                            Astraea, in Greek mythology. It signifies balance and harmony.</p>
+
+                        <h6 style="color: #37b6ff;">Visibility:</h6>
+                        <p>Libra is best viewed in the evening sky during the months of April and May, making it a
+                            popular
+                            constellation for stargazers in the spring.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- M Scorpius -->
+        <div class="modal fade" id="modalScorpio" tabindex="-1" aria-labelledby="modalScorpioLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: #37b6ff;">Scorpius - The Scorpion Constellation</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-white">
+                        <h6 style="color: #37b6ff;">General Information:</h6>
+                        <p><strong>Location:</strong> Scorpius is located in the southern sky, bordered by Libra,
+                            Ophiuchus,
+                            and Sagittarius. It is most prominent during the summer months in the Northern Hemisphere.
+                        </p>
+                        <p><strong>Right Ascension:</strong> 17 hours</p>
+                        <p><strong>Declination:</strong> -40 degrees</p>
+                        <p><strong>Area:</strong> 497 square degrees, making it the 33rd largest constellation.</p>
+
+                        <h6 style="color: #37b6ff;">Distance and Key Features:</h6>
+                        <ul>
+                            <li><strong>Distance from Earth:</strong> The stars in Scorpius vary in distance, with many
+                                located between 70 and 300 light-years away.</li>
+                            <li><strong>Notable Stars:</strong>
+                                <ul>
+                                    <li><strong>Antares:</strong> A red supergiant star approximately 600 light-years
+                                        away,
+                                        often referred to as the "heart" of Scorpius.</li>
+                                    <li><strong>Shaula (Lambda Scorpii):</strong> A bright star located about 700
+                                        light-years from Earth, part of the "tail" of Scorpius.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Notable Deep Sky Objects:</strong>
+                                <ul>
+                                    <li><strong>Messier 6 (Butterfly Cluster):</strong> A beautiful open star cluster
+                                        located approximately 1,600 light-years away.</li>
+                                    <li><strong>Messier 7 (Ptolemy's Cluster):</strong> Another bright open cluster
+                                        located
+                                        around 800 light-years from Earth.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h6 style="color: #37b6ff;">Mythology:</h6>
+                        <p>In mythology, Scorpius is often associated with the story of Orion. According to legend,
+                            Scorpius
+                            was sent to kill Orion, resulting in both being placed in the night sky. This explains why
+                            they
+                            are never seen together; when one rises, the other sets.</p>
+
+                        <h6 style="color: #37b6ff;">Visibility:</h6>
+                        <p>Scorpius is best visible in the evening sky during the summer months, particularly from May
+                            to
+                            August.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- M Sagittarius -->
+        <div class="modal fade" id="modalSagittarius" tabindex="-1" aria-labelledby="modalSagittariusLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: #37b6ff;">Sagittarius - The Archer Constellation</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-white">
+                        <h6 style="color: #37b6ff;">General Information:</h6>
+                        <p><strong>Location:</strong> Sagittarius is located in the southern sky and is bordered by
+                            Scorpius, Ophiuchus, and Capricornus. It can be seen between latitudes +55° and -90°.</p>
+                        <p><strong>Right Ascension:</strong> 18 hours</p>
+                        <p><strong>Declination:</strong> -30 degrees</p>
+                        <p><strong>Area:</strong> 867 square degrees, making it the 15th largest constellation.</p>
+
+                        <h6 style="color: #37b6ff;">Distance and Key Features:</h6>
+                        <ul>
+                            <li><strong>Distance from Earth:</strong> The stars in Sagittarius are mostly located
+                                between
+                                100 and 300 light-years away.</li>
+                            <li><strong>Notable Stars:</strong>
+                                <ul>
+                                    <li><strong>Alpha Sagittarii (Rukbat):</strong> The brightest star in Sagittarius,
+                                        located approximately 77 light-years away.</li>
+                                    <li><strong>Beta Sagittarii (Kaus Australis):</strong> A bright star about 145
+                                        light-years away, it is a blue supergiant star.</li>
+                                    <li><strong>Gamma Sagittarii:</strong> Also known as Nunki, this star is around 224
+                                        light-years away and is the second brightest in the constellation.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Notable Deep Sky Objects:</strong>
+                                <ul>
+                                    <li><strong>Messier 8 (Lagoon Nebula):</strong> A bright emission nebula located
+                                        about
+                                        5,000 light-years from Earth.</li>
+                                    <li><strong>Messier 20 (Trifid Nebula):</strong> A combination of emission,
+                                        reflection,
+                                        and dark nebulae situated approximately 5,200 light-years away.</li>
+                                    <li><strong>Messier 22:</strong> A globular cluster located around 10,000
+                                        light-years
+                                        away, known for its bright core.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h6 style="color: #37b6ff;">Mythology:</h6>
+                        <p>Sagittarius is often depicted as an archer or a centaur, representing the dual nature of
+                            humanity. In Greek mythology, it is associated with Chiron, the wise centaur known for his
+                            healing abilities.</p>
+
+                        <h6 style="color: #37b6ff;">Visibility:</h6>
+                        <p>Sagittarius is best viewed in the summer months, particularly from June to September, making
+                            it a
+                            popular constellation for stargazers during this period.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- M Capricorn -->
+        <div class="modal fade" id="modalCapricorn" tabindex="-1" aria-labelledby="modalCapricornLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: #37b6ff;">Capricorn - The Sea-Goat Constellation</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-white">
+                        <h6 style="color: #37b6ff;">General Information:</h6>
+                        <p><strong>Location:</strong> Capricornus is situated in the southern sky, bordered by
+                            Sagittarius,
+                            Aquarius, and Piscis Austrinus. It can be seen between latitudes +60° and -90°.</p>
+                        <p><strong>Right Ascension:</strong> 21 hours</p>
+                        <p><strong>Declination:</strong> -20 degrees</p>
+                        <p><strong>Area:</strong> 414 square degrees, making it the 40th largest constellation.</p>
+
+                        <h6 style="color: #37b6ff;">Distance and Key Features:</h6>
+                        <ul>
+                            <li><strong>Distance from Earth:</strong> The stars in Capricornus vary in distance from
+                                about
+                                40 to over 400 light-years away.</li>
+                            <li><strong>Notable Stars:</strong>
+                                <ul>
+                                    <li><strong>Alpha Capricorni (Schedar):</strong> The brightest star in Capricornus,
+                                        located approximately 42 light-years away.</li>
+                                    <li><strong>Beta Capricorni (Dabih):</strong> A binary star system approximately 330
+                                        light-years away, known for its distinct color contrast.</li>
+                                    <li><strong>Delta Capricorni (Menkalinan):</strong> This double star system is about
+                                        39
+                                        light-years away and is notable for its brightness.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Notable Deep Sky Objects:</strong>
+                                <ul>
+                                    <li><strong>Messier 30:</strong> A globular cluster located around 28,000
+                                        light-years
+                                        from Earth, known for its dense core and numerous stars.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h6 style="color: #37b6ff;">Mythology:</h6>
+                        <p>Capricorn is often depicted as a sea-goat, symbolizing the merging of land and sea. In
+                            mythology,
+                            it is associated with the god Pan, who transformed into a goat-fish to escape the monster
+                            Typhon.</p>
+
+                        <h6 style="color: #37b6ff;">Visibility:</h6>
+                        <p>Capricorn is best visible in the late summer and early fall months, particularly from July to
+                            October, making it a favorite constellation for stargazers during this time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- M Aquarius -->
+        <div class="modal fade" id="modalAquarius" tabindex="-1" aria-labelledby="modalAquariusLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: #37b6ff;">Aquarius - The Water Bearer Constellation</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-white">
+                        <h6 style="color: #37b6ff;">General Information:</h6>
+                        <p><strong>Location:</strong> Aquarius is located in the southern sky, bordered by Pisces,
+                            Capricornus, and Pegasus. It can be seen between latitudes +65° and -90°.</p>
+                        <p><strong>Right Ascension:</strong> 23 hours</p>
+                        <p><strong>Declination:</strong> -15 degrees</p>
+                        <p><strong>Area:</strong> 980 square degrees, making it the 10th largest constellation.</p>
+
+                        <h6 style="color: #37b6ff;">Distance and Key Features:</h6>
+                        <ul>
+                            <li><strong>Distance from Earth:</strong> The stars in Aquarius vary in distance, with some
+                                being around 100 light-years away.</li>
+                            <li><strong>Notable Stars:</strong>
+                                <ul>
+                                    <li><strong>Alpha Aquarii (Sadalmelik):</strong> The brightest star in Aquarius,
+                                        located
+                                        approximately 59 light-years away.</li>
+                                    <li><strong>Beta Aquarii (Sadalsuud):</strong> A binary star system about 540
+                                        light-years away.</li>
+                                    <li><strong>Delta Aquarii (Hydor):</strong> A bright star located approximately 138
+                                        light-years from Earth.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Notable Deep Sky Objects:</strong>
+                                <ul>
+                                    <li><strong>Messier 2:</strong> A globular cluster located about 37,500 light-years
+                                        from
+                                        Earth, known for its compact structure and bright core.</li>
+                                    <li><strong>Messier 73:</strong> A small asterism located about 200,000 light-years
+                                        away.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h6 style="color: #37b6ff;">Mythology:</h6>
+                        <p>Aquarius is often depicted as a water bearer, symbolizing the pouring out of life-giving
+                            water.
+                            In mythology, it is associated with Ganymede, a beautiful youth who was taken by Zeus to
+                            serve
+                            as the cupbearer to the gods.</p>
+
+                        <h6 style="color: #37b6ff;">Visibility:</h6>
+                        <p>Aquarius is best visible in the evening sky during the late summer and fall months,
+                            particularly
+                            from August to November.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- M Pisces -->
+        <div class="modal fade" id="modalPisces" tabindex="-1" aria-labelledby="modalPiscesLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: #37b6ff;">Pisces - The Fish Constellation</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-white">
+                        <h6 style="color: #37b6ff;">General Information:</h6>
+                        <p><strong>Location:</strong> Pisces is located in the northern sky, bordered by Aries,
+                            Aquarius,
+                            and Cetus. It can be seen between latitudes +90° and -65°.</p>
+                        <p><strong>Right Ascension:</strong> 1 hour</p>
+                        <p><strong>Declination:</strong> +30 degrees</p>
+                        <p><strong>Area:</strong> 889 square degrees, making it the 14th largest constellation.</p>
+
+                        <h6 style="color: #37b6ff;">Distance and Key Features:</h6>
+                        <ul>
+                            <li><strong>Distance from Earth:</strong> The stars in Pisces vary in distance, with some
+                                being
+                                around 100 light-years away.</li>
+                            <li><strong>Notable Stars:</strong>
+                                <ul>
+                                    <li><strong>Alpha Piscium (Alrescha):</strong> The brightest star in Pisces, located
+                                        approximately 139 light-years away.</li>
+                                    <li><strong>Beta Piscium (Fum al Samakah):</strong> A binary star system about 140
+                                        light-years away.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Notable Deep Sky Objects:</strong>
+                                <ul>
+                                    <li><strong>Messier 74:</strong> A spiral galaxy located about 30 million
+                                        light-years
+                                        away.</li>
+                                    <li><strong>Messier 65:</strong> Another spiral galaxy that is part of the Leo
+                                        constellation but is located near Pisces.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h6 style="color: #37b6ff;">Mythology:</h6>
+                        <p>Pisces is often depicted as two fish swimming in opposite directions, representing duality
+                            and
+                            the connection between the physical and spiritual worlds. In mythology, they are linked to
+                            the
+                            story of Aphrodite and Eros, who transformed into fish to escape the monster Typhon.</p>
+
+                        <h6 style="color: #37b6ff;">Visibility:</h6>
+                        <p>Pisces is best visible in the evening sky during the winter months, particularly from late
+                            February to late March.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal End -->
+
+
+    <!-- marquee -->
+    <div class="marquee-container" id="marqueeContainer">
+        <div class="marquee">
+            🌌 Welcome to our Sky Gazing website! Discover the wonders of the universe: Learn about planets,
+            constellations, comets, and upcoming celestial events! 🌠
+        </div>
+    </div>
+
+    <!-- Footer  -->
+    <div id="footer" class="container-fluid border-top pt-4 text-white"
+        style="margin-top: 8%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);">
+        <div class="container text-center">
+            <div class="row-1 my-3" data-aos="fade-up">
+                <div class="col d-flex justify-content-center">
+
+                    <a href="https://www.facebook.com/" target="_blank" class="nav-link m-2 social">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-facebook" viewBox="0 0 16 16">
+                            <path
+                                d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/" target="_blank" class="nav-link m-2 social">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-instagram" viewBox="0 0 16 16">
+                            <path
+                                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/?lang=en" class="nav-link m-2 social" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-twitter-x" viewBox="0 0 16 16">
+                            <path
+                                d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="col my-3">
+
+                    <p>A 563, Main Shahrah-e-Usman, Sector 11-A Sector 11 A North Karachi Twp, Karachi, Karachi City,
+                        Sindh 75850
+                    </p>
+                    <p><i class="fas fa-phone" style="color: #37b6ff; font-size: 18px;"></i>&nbsp; +92 123-456789
+                        &nbsp;&nbsp;|&nbsp;&nbsp; <i class="fas fa-envelope"
+                            style="color: #37b6ff; font-size: 18px;"></i>
+                        &nbsp;aptechnorthkarachi@edu.com.pk</p>
+                </div>
+
+                <div class="col d-flex justify-content-center">
+                    <a class="navbar-brand text-white fs-3  " href="index.html">
+                        <img src="assets/logo5.png" alt="Logo" width="300" height="50" class="">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container text-center">
+            <p class="py-2 border-top" style="margin-bottom: 0;">All Rights Reserved By Sky Gazing</p>
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script>
+        for (var i = 1; i <= 500; i++) {
+            (function (index) {
+                setTimeout(function () {
+                    document.getElementById('usercount').innerHTML = index;
+                }, index * 3);
+            })(i);
+        }
+    </script>
+    <script>
+        const marqueeContainer = document.getElementById('marqueeContainer');
+        const footer = document.getElementById('footer');
+
+        function checkMarqueePosition() {
+            const footerRect = footer.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            if (footerRect.top <= windowHeight) {
+                marqueeContainer.style.opacity = '0';
+            } else {
+                marqueeContainer.style.opacity = '1';
+            }
+        }
+
+        window.addEventListener('scroll', checkMarqueePosition);
+    </script>
+</body>
+
+</html>

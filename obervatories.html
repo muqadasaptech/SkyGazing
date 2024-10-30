@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observatories - Sky Gazing</title>
+    <link rel="icon" type="image/png" href="assets/logoend.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <!-- leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body {
+            background-image: url("assets/obserBG.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: "Poppins", sans-serif;
+        }
+
+        /* crousel */
+
+
+
+        /* Navbar */
+
+        .navbar {
+            --bs-navbar-toggler-border-color: #37b6ff;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2855, 182, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        .nav-link {
+            color: white;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus {
+            color: #37b6ff;
+        }
+
+        .navbar-nav .nav-link.active,
+        .navbar-nav .nav-link.show {
+            color: #37b6ff;
+        }
+
+        .nav-item {
+            margin: 0 10px;
+        }
+
+        .dropdown-item {
+            color: white;
+
+        }
+
+        .dropdown-menu {
+            --bs-dropdown-bg: #2b2b2b;
+            --bs-dropdown-border-color: #37b6ff;
+
+        }
+
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: #37b6ff;
+            color: white;
+        }
+
+        /* observartory */
+
+        .card {
+            position: relative;
+            width: 600px;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-body {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+
+        }
+
+        .card:hover .card-body {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+
+        }
+
+        /* custom  */
+
+        .social {
+            padding: 10px;
+            transition: all ease-in-out 0.3s;
+            display: inline-block;
+            perspective: 1000px;
+
+        }
+
+        .social svg {
+            display: block;
+            transition: transform 1s;
+            transform-style: preserve-3d;
+
+        }
+
+        .social:hover svg {
+            transform: rotateY(360deg);
+        }
+
+        .social:hover {
+            border-radius: 100%;
+            -webkit-box-shadow: 0px 0px 47px 1px rgba(55, 182, 255, 0.89);
+            -moz-box-shadow: 0px 0px 47px 1px rgba(55, 182, 255, 0.89);
+            box-shadow: 0px 0px 47px 1px rgba(55, 182, 255, 0.89);
+        }
+
+        .m-6 {
+            margin: 80px 100px;
+        }
+
+        .btn-primary {
+            background-color: #37b6ff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #37b6ffb2;
+        }
+
+        .cs-shadow {
+            -webkit-box-shadow: 0px 0px 13px -1px rgba(255, 255, 255, 1);
+            -moz-box-shadow: 0px 0px 13px -1px rgba(255, 255, 255, 1);
+            box-shadow: 0px 0px 13px -1px rgba(255, 255, 255, 1);
+        }
+
+        .border-color {
+            border: 2px solid #37b6ff;
+        }
+
+        /* marquee */
+        .marquee-container {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+
+        .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            color: #37b6ff;
+            font-size: 1.2rem;
+            font-family: 'Arial', sans-serif;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-------------------- NavBar -------------------->
+
+
+    <nav class="navbar navbar-expand-lg border-bottom" style="backdrop-filter: blur(10px);">
+        <div class="container">
+            <a class="navbar-brand text-white fs-3  " href="index.html" data-aos="zoom-in" data-aos-duration="1500">
+                <img src="assets/logo5.png" alt="Logo" width="300" height="50" class="">
+            </a>
+
+            <button class="navbar-toggler" data-aos="zoom-in" data-aos-duration="1500" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav ms-auto" data-aos="zoom-in" data-aos-duration="1500">
+
+                    <li class="nav-item text-center">
+                        <a class="nav-link" aria-current="page" href="index.html">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                            </svg><br>Home</a>
+                    </li>
+
+                    <!-- Explore DropDown -->
+                    <li class="nav-item dropdown rounded text-center">
+                        <a class="nav-link text-center dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-binoculars-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M4.5 1A1.5 1.5 0 0 0 3 2.5V3h4v-.5A1.5 1.5 0 0 0 5.5 1zM7 4v1h2V4h4v.882a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V13H9v-1.5a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5V13H1V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882V4zM1 14v.5A1.5 1.5 0 0 0 2.5 16h3A1.5 1.5 0 0 0 7 14.5V14zm8 0v.5a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5-1.5V14zm4-11H9v-.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5z" />
+                            </svg><br>Explore
+                        </a>
+                        <ul class="dropdown-menu ">
+                            <li><a class="dropdown-item rounded-1" href="planets.html">
+                                    Planets</a></li>
+
+                            <li><a class="dropdown-item rounded-1" href="constellation.html">
+                                    Constellations</a></li>
+
+                            <li><a class="dropdown-item rounded-1" href="stargazing.html">
+                                    Star Gaze</a></li>
+
+                            <li><a class="dropdown-item rounded-1" href="comets.html">
+                                    Comets</a></li>
+                        </ul>
+                    </li>
+                    <!-- Explore DropDown END -->
+
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="insights.html">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-star-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                            </svg><br>Insights
+                        </a>
+                    </li>
+
+                    <li class="nav-item text-center">
+                        <a class="nav-link active" href="obervatories.html">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                                <path
+                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                            </svg><br>Observatories</a>
+                    </li>
+
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="getintouch.html">
+                            <svg xmlns="http://www.w3.org/4000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-people-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+                            </svg><br>Get in Touch</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- usercount -->
+        <button type="button" class="rounded-circle bg-transparent border-0 d-none d-lg-block mx-5 position-relative">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#37b6ff" class="bi bi-person-rolodex"
+                viewBox="0 0 16 16">
+                <path d="M8 9.05a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+                <path
+                    d="M1 1a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h.5a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h.5a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H6.707L6 1.293A1 1 0 0 0 5.293 1zm0 1h4.293L6 2.707A1 1 0 0 0 6.707 3H15v10h-.085a1.5 1.5 0 0 0-2.4-.63C11.885 11.223 10.554 10 8 10c-2.555 0-3.886 1.224-4.514 2.37a1.5 1.5 0 0 0-2.4.63H1z" />
+            </svg>
+            <span id="usercount"
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                99+
+                <span class="visually-hidden">unread messages</span>
+            </span>
+        </button>
+    </nav>
+
+
+
+    <!-- intro -->
+
+    <div class="container mx-auto px-3" data-aos="fade-right" data-aos-duration="1500"
+        style="padding-bottom: 10%; margin-top: 18%; text-align: justify;">
+        <h1 class="display-5 fw-bold mb-3 text-center text-md-start" style="color: #37b6ff;">
+            Gaze into the Cosmos from World-Renowned Observatories
+        </h1>
+        <p class="text-white fs-4">
+            Embark on a journey through the cosmos at some of the most renowned observatories on Earth. These advanced
+            facilities allow you to witness planets, distant galaxies, and nebulae like never before. Whether you're a
+            beginner or an experienced observer, visiting an observatory offers a unique opportunity to deepen your
+            understanding of the universe and its wonders.
+        </p>
+        <div class="d-flex justify-content-center justify-content-md-start">
+            <a href="#observatories-list" class="btn btn-primary btn-lg fw-semibold px-5">Start Your Cosmic Journey</a>
+        </div>
+    </div>
+
+    <!-- Global Top Observatories -->
+    <div class="m-6" id="observatories-list" style="border-bottom: 1px solid #ffffff;"></div>
+    <h1 class="display-5 fw-bold text-center mb-5" style="color: #37b6ff;" data-aos="zoom-in">Global Astronomy
+        Observatories</h1>
+    <div class="container" style="margin-top: 50px; ">
+        <div class="row">
+            <!-- Observatory 1 -->
+            <div class="col-12 col-lg-6 d-flex justify-content-center mb-4" data-aos="fade-right">
+                <div class="card cs-shadow border-color" style="overflow: hidden;">
+                    <img src="assets/obser1.png" alt="Mauna Kea Observatory" class="card-img-top">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold" style="color: #37b6ff;"><span
+                                style="background-color: rgba(0, 0, 0, 0.5);" class="rounded-5 px-1">Mauna Kea
+                                Observatories</span></h5>
+                        <p class="card-location text-white"><strong>Location :</strong> Mauna Kea, Hawaii</p>
+                        <p class="card-text text-white">Located on the Mauna Kea volcano, this site features advanced
+                            telescopes
+                            and excellent atmospheric conditions, making it vital for astronomical research.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Observatory 2 -->
+            <div class="col-12 col-lg-6 d-flex justify-content-center mb-4" data-aos="fade-left">
+                <div class="card cs-shadow border-color" style="overflow: hidden;">
+                    <img src="assets/obser2.jpg" alt="Palomar Observatory" class="card-img-top">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold" style="color: #37b6ff;"><span
+                                style="background-color: rgba(0, 0, 0, 0.5);" class="rounded-5 px-1">Palomar
+                                Observatory</span></h5>
+                        <p class="card-location text-white"><strong>Location :</strong> California, USA</p>
+                        <p class="card-text text-white">Home to the 200-inch Hale Telescope, this California observatory
+                            has played
+                            a key role in astronomical discoveries since 1948.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Observatory 3 -->
+            <div class="col-12 col-lg-6 d-flex justify-content-center mb-4" data-aos="fade-right">
+                <div class="card cs-shadow border-color" style="overflow: hidden;">
+                    <img src="assets/obser3.png" alt="Kitt Peak National Observatory" class="card-img-top">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold" style="color: #37b6ff;"><span
+                                style="background-color: rgba(0, 0, 0, 0.5);" class="rounded-5 px-1">Kitt Peak National
+                                Observatory</span></h5>
+                        <p class="card-location text-white"><strong>Location :</strong> Arizona, USA</p>
+                        <p class="card-text text-white">Kitt Peak hosts the largest collection of optical telescopes
+                            globally and
+                            offers various public programs to promote astronomy.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Observatory 4 -->
+            <div class="col-12 col-lg-6 d-flex justify-content-center mb-4" data-aos="fade-left">
+                <div class="card cs-shadow border-color" style="overflow: hidden;">
+                    <img src="assets/obser4.png" alt="Observatorio del Teide" class="card-img-top">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold" style="color: #37b6ff;"><span
+                                style="background-color: rgba(0, 0, 0, 0.5);" class="rounded-5 px-1">Observatorio del
+                                Teide</span></h5>
+                        <p class="card-location text-white"><strong>Location :</strong> Mount Teide, Spain</p>
+                        <p class="card-text text-white">Located on Mount Teide, this observatory is known for its
+                            cutting-edge
+                            research and significant contributions to astronomy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Map -->
+    <div class="m-6" style="border-bottom: 1px solid #ffffff;"></div>
+    <h1 class="display-5 fw-bold text-center mb-5" style="color: #37b6ff;" data-aos="zoom-in">Interactive Map of
+        Observatories</h1>
+    <div class="container" data-aos="fade-up">
+        <div id="observatory-map" class="cs-shadow border-color" style="height: 500px; border-radius: 25px;"></div>
+    </div>
+
+    <!-- notable card -->
+    <div class="m-6" style="border-bottom: 1px solid #ffffff;"></div>
+    <h1 class="display-5 fw-bold text-center mb-5" style="color: #37b6ff;" data-aos="zoom-in">Notable Discoveries in
+        Astronomy</h1>
+    <div class="container mt-5">
+        <div class="row g-4">
+
+            <div class="col-md-4 d-flex justify-content-center" data-aos="fade-right">
+                <div class="card cs-shadow border-color"
+                    style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); height: 350px;">
+                    <img src="assets/exoplanet.jpg" alt="Illustration of an exoplanet" class="card-img-top">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fs-3" style="color: #37b6ff;">Exoplanets</h5>
+                        <p class="card-text text-white flex-grow-1">Thousands of exoplanets have been discovered using
+                            the Kepler Space Telescope, revealing diverse planetary systems.</p>
+                        <a href="#" class="btn btn-primary mt-auto" data-bs-toggle="modal"
+                            data-bs-target="#exoplanetModal">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 d-flex justify-content-center" data-aos="fade-up">
+                <div class="card cs-shadow border-color"
+                    style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); height: 350px;">
+                    <img src="assets/blachole.jpg" alt="First image of a black hole" class="card-img-top">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fs-3" style="color: #37b6ff;">Black Holes</h5>
+                        <p class="card-text text-white flex-grow-1">The Event Horizon Telescope captured the first image
+                            of a black hole in 2019, revolutionizing our understanding of these cosmic phenomena.</p>
+                        <a href="#" class="btn btn-primary mt-auto" data-bs-toggle="modal"
+                            data-bs-target="#blackHoleModal">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 d-flex justify-content-center" data-aos="fade-left">
+                <div class="card cs-shadow border-color"
+                    style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); height: 350px;">
+                    <img src="assets/galaxy.jpg" alt="Hubble deep field image showing multiple galaxies"
+                        class="card-img-top">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fs-3" style="color: #37b6ff;">Galaxies</h5>
+                        <p class="card-text text-white flex-grow-1">Hubble Space Telescope has helped discover and map
+                            billions of galaxies, revealing the vastness of our universe.</p>
+                        <a href="#" class="btn btn-primary mt-auto" data-bs-toggle="modal"
+                            data-bs-target="#galaxyModal">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal notable dicoveries -->
+    <div>
+        <!-- Modal for Exoplanets -->
+        <div class="modal fade" id="exoplanetModal" tabindex="-1" aria-labelledby="exoplanetModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: #37b6ff;" id="exoplanetModalLabel">Notable Discoveries:
+                            Exoplanets</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-white">
+                        <h6 style="color: #37b6ff;">Key Discoveries:</h6>
+                        <ul>
+                            <li><strong>Kepler-186f:</strong> The first Earth-sized exoplanet discovered in the
+                                habitable zone of another star.</li>
+                            <li><strong>TRAPPIST-1 System:</strong> A system with seven Earth-sized planets, three of
+                                which are in the habitable zone.</li>
+                            <li><strong>Proxima Centauri b:</strong> The closest known exoplanet to Earth, located in
+                                the habitable zone of its star.</li>
+                        </ul>
+                        <h6 style="color: #37b6ff;">Importance of Discoveries:</h6>
+                        <p>These discoveries have revolutionized our understanding of potential life beyond Earth and
+                            the diversity of planetary systems.</p>
+                        <h6 style="color: #37b6ff;">Fun Fact:</h6>
+                        <p>There are over 5,000 confirmed exoplanets as of 2024, with many more awaiting confirmation!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Black Holes -->
+        <div class="modal fade" id="blackHoleModal" tabindex="-1" aria-labelledby="blackHoleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: #37b6ff;" id="blackHoleModalLabel">Notable Discoveries:
+                            Black Holes</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-white">
+                        <h6 style="color: #37b6ff;">Key Discoveries:</h6>
+                        <ul>
+                            <li><strong>First Image of a Black Hole:</strong> Captured in 2019 by the Event Horizon
+                                Telescope, showing the black hole in M87.</li>
+                            <li><strong>Sagittarius A*:</strong> The supermassive black hole at the center of our Milky
+                                Way galaxy.</li>
+                            <li><strong>Gravitational Waves:</strong> Detected by LIGO, confirming the existence of
+                                black hole mergers.</li>
+                        </ul>
+                        <h6 style="color: #37b6ff;">Importance of Discoveries:</h6>
+                        <p>These discoveries have provided profound insights into the nature of black holes and the
+                            fundamental laws of physics.</p>
+                        <h6 style="color: #37b6ff;">Fun Fact:</h6>
+                        <p>Black holes can be millions or even billions of times more massive than our Sun!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Galaxies -->
+        <div class="modal fade" id="galaxyModal" tabindex="-1" aria-labelledby="galaxyModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color: #37b6ff;" id="galaxyModalLabel">Notable Discoveries:
+                            Galaxies</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-white">
+                        <h6 style="color: #37b6ff;">Key Discoveries:</h6>
+                        <ul>
+                            <li><strong>Hubble Deep Field:</strong> A deep-sky survey revealing thousands of galaxies in
+                                a tiny patch of sky.</li>
+                            <li><strong>Galaxy Clusters:</strong> Discovery of vast clusters of galaxies, such as the
+                                Virgo Cluster.</li>
+                            <li><strong>Dark Matter:</strong> Evidence of dark matter's influence on galaxy formation
+                                and motion.</li>
+                        </ul>
+                        <h6 style="color: #37b6ff;">Importance of Discoveries:</h6>
+                        <p>These discoveries have expanded our understanding of the universe's structure and the forces
+                            shaping it.</p>
+                        <h6 style="color: #37b6ff;">Fun Fact:</h6>
+                        <p>There are an estimated 2 trillion galaxies in the observable universe!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- marquee -->
+    <div class="marquee-container" id="marqueeContainer">
+        <div class="marquee">
+            🌌 Welcome to our Sky Gazing website! Discover the wonders of the universe: Learn about planets,
+            constellations, comets, and upcoming celestial events! 🌠
+        </div>
+    </div>
+
+
+    <!-- Footer  -->
+    <div id="footer" class="container-fluid border-top pt-4 text-white"
+        style="margin-top: 8%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);">
+        <div class="container text-center">
+            <div class="row-1 my-3" data-aos="fade-up">
+                <div class="col d-flex justify-content-center">
+
+                    <a href="https://www.facebook.com/" target="_blank" class="nav-link m-2 social">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-facebook" viewBox="0 0 16 16">
+                            <path
+                                d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/" target="_blank" class="nav-link m-2 social">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-instagram" viewBox="0 0 16 16">
+                            <path
+                                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/?lang=en" class="nav-link m-2 social" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-twitter-x" viewBox="0 0 16 16">
+                            <path
+                                d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="col my-3 ">
+
+                    <p>A 563, Main Shahrah-e-Usman, Sector 11-A Sector 11 A North Karachi Twp, Karachi, Karachi
+                        City,
+                        Sindh 75850
+                    </p>
+                    <p><i class="fas fa-phone" style="color: #37b6ff; font-size: 18px;"></i>&nbsp; +92 123-456789
+                        &nbsp;&nbsp;|&nbsp;&nbsp; <i class="fas fa-envelope"
+                            style="color: #37b6ff; font-size: 18px;"></i>
+                        &nbsp;aptechnorthkarachi@edu.com.pk</p>
+                </div>
+
+                <div class="col d-flex justify-content-center">
+                    <a class="navbar-brand text-white" href="index.html">
+                        <img src="assets/logo5.png" alt="Logo" width="300" height="50" class="">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container text-center">
+            <p class="py-2 border-top" style="margin-bottom: 0;">All Rights Reserved By Sky Gazing</p>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <!-- Leaflet Map script -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('observatory-map', {
+            minZoom: 2,
+            maxZoom: 10,
+            zoomControl: false,
+            scrollWheelZoom: false
+        });
+
+        L.control.zoom({
+            position: 'topright'
+        }).addTo(map);
+
+        // Add custom control for Ctrl+zoom label
+        L.Control.CtrlZoomLabel = L.Control.extend({
+            onAdd: function (map) {
+                var container = L.DomUtil.create('div', 'leaflet-control-ctrlzoom');
+                container.innerHTML = 'Ctrl+zoom';
+                container.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+                container.style.color = 'white';
+                container.style.padding = '5px 10px';
+                container.style.borderRadius = '4px';
+                container.style.fontSize = '12px';
+                return container;
+            }
+        });
+
+        L.control.ctrlZoomLabel = function (opts) {
+            return new L.Control.CtrlZoomLabel(opts);
+        }
+
+        L.control.ctrlZoomLabel({ position: 'topleft' }).addTo(map);
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
+        }).addTo(map);
+
+        const observatories = [
+            { name: 'Mauna Kea', coords: [19.8207, -155.4681], description: 'Located on the Mauna Kea volcano in Hawaii. Advanced telescopes and excellent atmospheric conditions.' },
+            { name: 'Palomar', coords: [33.3563, -116.8650], description: 'Home to the 200-inch Hale Telescope in California. Played a key role in astronomical discoveries since 1948.' },
+            { name: 'Kitt Peak', coords: [31.9582, -111.5993], description: 'Kitt Peak in Arizona hosts the largest collection of optical telescopes globally.' },
+            { name: 'Teide', coords: [28.3007, -16.5096], description: 'Located on Mount Teide, Spain. Known for cutting-edge research and contributions to astronomy.' },
+            { name: 'ESO', coords: [-24.6270, -70.4046], description: 'Located in the Atacama Desert of Chile. Home to the Very Large Telescope (VLT).' },
+            { name: 'Arecibo', coords: [18.3442, -66.7528], description: 'Located in Puerto Rico. Previously the largest radio telescope in the world until 2020.' },
+            { name: 'Green Bank', coords: [38.4331, -79.8397], description: 'Home to the Green Bank Telescope in West Virginia, USA. Specializes in radio astronomy.' },
+            { name: 'Siding Spring', coords: [-31.2733, 149.0700], description: 'Located in Australia, the observatory is part of the Research School of Astronomy & Astrophysics.' },
+            { name: 'Roque de los Muchachos', coords: [28.7624, -17.8948], description: 'Located in La Palma, Canary Islands, it hosts some of the most advanced telescopes in the world.' },
+            { name: 'Cerro Tololo', coords: [-30.1690, -70.8066], description: 'Located in Chile, this observatory is a hub for optical astronomy.' },
+            { name: 'Keck', coords: [19.8255, -155.4750], description: 'Located on Mauna Kea, Hawaii. Home to two of the largest optical/infrared telescopes in the world.' },
+            { name: 'Subaru', coords: [19.8254, -155.4768], description: 'A large optical-infrared telescope on Mauna Kea, operated by the National Astronomical Observatory of Japan.' },
+            { name: 'Gemini North', coords: [19.8238, -155.4690], description: 'Part of the international Gemini Observatory, located on Mauna Kea, Hawaii.' },
+            { name: 'ALMA', coords: [-23.0193, -67.7532], description: 'The Atacama Large Millimeter/submillimeter Array in northern Chile, a state-of-the-art radio telescope array.' },
+            { name: 'LIGO Hanford', coords: [46.4551, -119.4075], description: 'One of two detectors of the Laser Interferometer Gravitational-Wave Observatory, located in Washington, USA.' },
+            { name: 'LIGO Livingston', coords: [30.5630, -90.7742], description: 'The second detector of LIGO, located in Louisiana, USA.' },
+            { name: 'Paranal', coords: [-24.6275, -70.4048], description: 'Home to the Very Large Telescope (VLT) in Chile, one of the most productive ground-based facilities in astronomy.' },
+            { name: 'La Silla', coords: [-29.2567, -70.7381], description: 'ESO\'s first observatory site in Chile, still at the forefront of astronomy.' },
+            { name: 'FAST', coords: [25.6534, 106.8563], description: 'Five-hundred-meter Aperture Spherical Telescope in China, the world\'s largest filled-aperture radio telescope.' },
+            { name: 'SKA', coords: [-30.7215, 21.4109], description: 'The future site of the Square Kilometre Array in South Africa, set to be the world\'s largest radio telescope.' }
+        ];
+
+        const bounds = L.latLngBounds(observatories.map(obs => obs.coords));
+
+        map.fitBounds(bounds, {
+            padding: [50, 50]
+        });
+
+        observatories.forEach(observatory => {
+            const marker = L.marker(observatory.coords).addTo(map);
+
+            marker.bindTooltip(observatory.name, {
+                permanent: true,
+                direction: 'top',
+                className: 'custom-tooltip'
+            });
+
+            marker.on('click', function () {
+                map.setView(observatory.coords, 8);
+                this.unbindTooltip();
+                this.bindPopup(`<h3>${observatory.name}</h3><p>${observatory.description}</p>`)
+                    .openPopup();
+            });
+        });
+
+        const southWest = L.latLng(bounds.getSouth() - 10, bounds.getWest() - 10);
+        const northEast = L.latLng(bounds.getNorth() + 10, bounds.getEast() + 10);
+        const maxBounds = L.latLngBounds(southWest, northEast);
+        map.setMaxBounds(maxBounds);
+
+        const style = document.createElement('style');
+        style.textContent = `
+    .custom-tooltip {
+        background-color: rgba(0, 0, 0, 0.75);
+        border: none;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+    }
+    .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+        background-color: rgba(0, 0, 0, 0.75);
+        color: white;
+    }
+    .leaflet-popup-content-wrapper {
+        border-radius: 4px;
+    }
+    .leaflet-popup-content {
+        margin: 8px 12px;
+        line-height: 1.4;
+    }
+    .leaflet-popup-content h3 {
+        margin: 0 0 5px 0;
+        font-size: 16px;
+    }
+    .leaflet-popup-content p {
+        margin: 0;
+        font-size: 14px;
+    }
+`;
+        document.head.appendChild(style);
+
+        map.on('click', function (e) {
+            if (e.originalEvent.target.id === 'observatory-map') {
+                map.fitBounds(bounds, {
+                    padding: [50, 50]
+                });
+            }
+        });
+
+        // Add ctrl+scroll zoom functionality
+        map.on('mouseout', function () {
+            map.scrollWheelZoom.disable();
+        });
+
+        map.on('mouseover', function () {
+            if (map.scrollWheelZoom.enabled()) {
+                map.scrollWheelZoom.disable();
+            }
+        });
+
+        map.on('focus', function () {
+            if (map.scrollWheelZoom.enabled()) {
+                map.scrollWheelZoom.disable();
+            }
+        });
+
+        function handleScroll(e) {
+            if (e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+                map.scrollWheelZoom.enable();
+                map.scrollWheelZoom._onWheelScroll(e);
+            }
+        }
+
+        map.getContainer().addEventListener('wheel', handleScroll, { passive: false });
+
+        map.on('mouseout', function () {
+            map.getContainer().removeEventListener('wheel', handleScroll);
+        });
+
+        map.on('mouseover', function () {
+            map.getContainer().addEventListener('wheel', handleScroll, { passive: false });
+        });
+    </script>
+    <script>
+        for (var i = 1; i <= 500; i++) {
+            (function (index) {
+                setTimeout(function () {
+                    document.getElementById('usercount').innerHTML = index;
+                }, index * 3);
+            })(i);
+        }
+    </script>
+    <script>
+        const marqueeContainer = document.getElementById('marqueeContainer');
+        const footer = document.getElementById('footer');
+
+        function checkMarqueePosition() {
+            const footerRect = footer.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            if (footerRect.top <= windowHeight) {
+                marqueeContainer.style.opacity = '0';
+            } else {
+                marqueeContainer.style.opacity = '1';
+            }
+        }
+
+        window.addEventListener('scroll', checkMarqueePosition);
+    </script>
+</body>
+
+</html>
